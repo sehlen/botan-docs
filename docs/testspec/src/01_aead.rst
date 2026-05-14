@@ -146,7 +146,7 @@ following.
    |                      |                                                                           |
    |                      | #. Reset the AEAD_Decryption object                                       |
    |                      |                                                                           |
-   |                      | #. Set the nonce *Nonce* on the AEAD\_Decryption object                   |
+   |                      | #. Set the nonce *Nonce* on the AEAD_Decryption object                    |
    |                      |                                                                           |
    |                      | #. Set the associated data *AD* on the AEAD_Decryption object             |
    |                      |                                                                           |
@@ -209,7 +209,7 @@ following.
    |                      |                                                                           |
    |                      | #. Set the associated data *AD* on the AEAD_Decryption object             |
    |                      |                                                                           |
-   |                      | #. Set the nonce *Nonce* on the AEAD\_Decryption object                   |
+   |                      | #. Set the nonce *Nonce* on the AEAD_Decryption object                    |
    |                      |                                                                           |
    |                      | #. Create a modified version of *Out*, by changing the length of Out or   |
    |                      |    by flipping random bits in *Out*                                       |
