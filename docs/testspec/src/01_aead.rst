@@ -132,7 +132,7 @@ following.
    |                      |    associated data, check that setting *AD* on the AEAD_Decryption object |
    |                      |    throws an exception                                                    |
    |                      |                                                                           |
-   |                      | #. Set the key *Key* on the AEAD_Encryption object                        |
+   |                      | #. Set the key *Key* on the AEAD_Decryption object                        |
    |                      |                                                                           |
    |                      | #. Check that trying to decrypt a random value before setting a nonce     |
    |                      |    throws an exception                                                    |
@@ -141,11 +141,6 @@ following.
    |                      |                                                                           |
    |                      | #. Set a modified version of associated data *AD* on the AEAD_Decryption  |
    |                      |    object                                                                 |
-   |                      |                                                                           |
-   |                      | #. Check that trying to decrypt a random value before setting a nonce     |
-   |                      |    throws an exception                                                    |
-   |                      |                                                                           |
-   |                      | #. Set a modified version of nonce *Nonce* on the AEAD_Decryption object  |
    |                      |                                                                           |
    |                      | #. Pass a random ciphertext value into the AEAD_Decryption object         |
    |                      |                                                                           |
