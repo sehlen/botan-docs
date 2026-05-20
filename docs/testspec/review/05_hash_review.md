@@ -2,7 +2,7 @@
 
 **Botan Version:** 3.12.0
 **Date:** 2026-05-20
-**Files Reviewed:** 05_hash.rst
+**File Reviewed:** 05_hash.rst
 
 ---
 
