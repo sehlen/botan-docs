@@ -9,7 +9,7 @@ validates the correctness of the HMAC-DRBG random number generator
 (*hmac_drbg_unit*).
 
 All unit tests for various RNGs are implemented in
-:srcref:`src/tests/test_rngs.cpp`.
+:srcref:`src/tests/test_rng_behavior.cpp`.
 
 All Known-Answer tests are implemented in :srcref:`src/tests/test_rng_kat.cpp`.
 
@@ -77,7 +77,7 @@ Unit Test for HMAC-DRBG
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 The unit tests for HMAC-DRBG (**hmac_drbg_unit**) are implemented in
-:srcref:`src/tests/test_rngs.cpp`. They extend the **hmac_drbg** test suite with
+:srcref:`src/tests/test_rng_behavior.cpp`. They extend the **hmac_drbg** test suite with
 negative tests. The following additional properties of HMAC-DRBG are
 tested:
 
@@ -230,15 +230,16 @@ for initialization, seeding and reseeding.
    +-----------------------+--------------------------------------------------------------------------+
    | **Expected Output:**  | None                                                                     |
    +-----------------------+--------------------------------------------------------------------------+
-   | **Steps:**            | #. Create an AutoSeeded_RNG object with an empty set of entropy sources  |
+   | **Steps:**            | #. Create an AutoSeeded_RNG object with a Null_RNG as the entropy source |
    |                       |    and check that it throws a PRNG_Unseeded exception                    |
    |                       |                                                                          |
-   |                       | #. Create an AutoSeeded_RNG object with a Null_RNG as the entropy source |
-   |                       |    and check that it throws a PRNG_Unseeded exception                    |
+   |                       | #. (Requires BOTAN_HAS_ENTROPY_SOURCE) Create an AutoSeeded_RNG object   |
+   |                       |    with an empty set of entropy sources and check that it throws a       |
+   |                       |    PRNG_Unseeded exception                                               |
    |                       |                                                                          |
-   |                       | #. Create an AutoSeeded_RNG object with a an empty set of entropy        |
-   |                       |    sources and a Null_RNG as the entropy source and check that it throws |
-   |                       |    a PRNG_Unseeded exception                                             |
+   |                       | #. (Requires BOTAN_HAS_ENTROPY_SOURCE) Create an AutoSeeded_RNG object   |
+   |                       |    with an empty set of entropy sources and a Null_RNG as the entropy   |
+   |                       |    source and check that it throws a PRNG_Unseeded exception             |
    |                       |                                                                          |
    |                       | #. Create an AutoSeeded_RNG object with the default constructor          |
    |                       |                                                                          |
@@ -258,8 +259,6 @@ for initialization, seeding and reseeding.
    |                       |                                                                          |
    |                       | #. Check that the AutoSeeded_RNG is seeded                               |
    |                       |                                                                          |
-   |                       | #. Check that the AutoSeeded_RNG is seeded                               |
-   |                       |                                                                          |
    |                       | #. Extract 16 random bytes from the AutoSeeded_RNG                       |
    |                       |                                                                          |
    |                       | #. Reset the AutoSeeded_RNG                                              |
@@ -276,6 +275,10 @@ for initialization, seeding and reseeding.
    |                       |    reseed                                                                |
    |                       |                                                                          |
    |                       | #. Check that the AutoSeeded_RNG is seeded                               |
+   |                       |                                                                          |
+   |                       | #. Verify that the RNG accepts arbitrary-length input and output buffers |
+   |                       |    (edge-case sweep over sizes 0-4095 calling both randomize() and       |
+   |                       |    add_entropy())                                                        |
    +-----------------------+--------------------------------------------------------------------------+
 
 System_RNG
