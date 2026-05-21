@@ -311,8 +311,8 @@ See individual review files for full details.
 
 - **Total test specification files reviewed:** 16
 - **Total test cases reviewed:** 204 (includes 3 TPM-session entries added during review)
-- **`CONFIRMED_NO_CHANGE`:** 119
-- **`MINOR_FIX`:** 47
+- **`CONFIRMED_NO_CHANGE`:** 125
+- **`MINOR_FIX`:** 41
 - **`SUBSTANTIVE_FIX`:** 38
 - **`MISSING_TEST`:** ~50+ (see New Tests table above)
 - **`OUT_OF_SCOPE_DECISION`:** 5 (KEM generic/internal tests)

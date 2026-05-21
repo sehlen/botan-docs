@@ -1,19 +1,40 @@
 # Test Specification Review Files
 
-This directory contains review findings from automated agents that verified the test specifications against Botan 3.12.0.
+This directory contains review findings from automated agents that verified
+the test specifications against Botan 3.12.0.
 
-## Format
+## Access Limitation Notice
 
-Each review file corresponds to exactly one test specification RST file. For each test case reviewed:
+The review agents ran in a sandboxed environment with firewall restrictions
+that blocked access to GitHub MCP/API endpoints and the Botan source tree
+via HTTP. All source verification was performed **locally** using the
+Botan 3.12.0 source code that was already cloned on disk. Lines marked
+"source-verified" were confirmed by reading the local source files directly.
+Any finding that could not be verified locally is explicitly marked as
+"inferred" or "unverified" in the notes. The overall review is structurally
+sound, but individual source-line anchors and registration names should be
+cross-checked when applying changes.
 
-- ✅ **CONFIRMED**: Description accurately reflects the current Botan 3.12.0 implementation
-- 🔄 **PROPOSED CHANGES**: Description needs updates; proposed new text is included
-- ➕ **NEW TEST**: Found in Botan 3.12.0 but not yet in the test spec
+## Status Codes
 
-## Files
+Each reviewed test case carries one of the following statuses:
+
+| Status | Symbol | Meaning |
+|--------|--------|---------|
+| CONFIRMED_NO_CHANGE | ✅ | Spec accurately matches source; no .rst change required |
+| MINOR_FIX | 🔧 | Typo, wording, source-file reference, precondition, or guard issue |
+| SUBSTANTIVE_FIX | 🔄 | Steps or expected behavior differ materially from source |
+| MISSING_TEST | ➕ | Source test exists but has no spec entry |
+| OUT_OF_SCOPE_DECISION | ⚠️ | Source test exists but spec intentionally omits it; rationale documented |
+
+> **Note:** The initial review used a binary confirmed/proposed-changes model.
+> These files are being migrated to the five-status model above.
+> Until migration is complete, entries may still use the old ✅ / 🔄 symbols.
+
+## Review Files
 
 | Review File | RST File |
-|---|---|
+|-------------|----------|
 | 01_aead_review.md | 01_aead.rst |
 | 02_cert_store_review.md | 02_cert_store.rst |
 | 03_block_ciphers_review.md | 03_block_ciphers.rst |
