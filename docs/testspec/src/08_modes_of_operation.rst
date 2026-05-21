@@ -60,6 +60,11 @@ in the following.
    |                     |    size blocks and comparing the result with the expected output value     |
    |                     |    *Out*                                                                   |
    |                     |                                                                            |
+   |                     | #. Verify that ``update_granularity()``, ``ideal_granularity()``, and      |
+   |                     |    ``output_length()`` return correct and self-consistent values           |
+   |                     |                                                                            |
+   |                     | #. Verify that ``valid_nonce_length(default_nonce_length())`` returns true |
+   |                     |                                                                            |
    |                     | #. Clear the Cipher_Mode encryption object                                 |
    |                     |                                                                            |
    |                     | #. Test that calculating the ciphertext after clearing throws an exception |
@@ -103,12 +108,12 @@ in the following.
    |                     |                                                                            |
    |                     | #. Test that large nonce sizes are rejected by throwing an exception       |
    |                     |                                                                            |
-   |                     | #. Set the key *Key* on the Cipher_Mode encryption object                  |
+   |                     | #. Set the key *Key* on the Cipher_Mode decryption object                  |
    |                     |                                                                            |
    |                     | #. Set the nonce *Nonce* on the Cipher_Mode decryption object              |
    |                     |                                                                            |
-   |                     | #. Calculate the plaintext of output value *In* and compare the result     |
-   |                     |    with the output value *In*                                              |
+   |                     | #. Decrypt ciphertext *Out* and compare the result with the expected       |
+   |                     |    plaintext *In*                                                          |
    |                     |                                                                            |
    |                     | #. If *Out* is longer than the block size of the mode, calculate the       |
    |                     |    plaintext of input value *Out* by decrypting *Out* in block size blocks |
@@ -118,6 +123,11 @@ in the following.
    |                     |    plaintext of input value *Out* by decrypting *Out* in multiples of      |
    |                     |    block size blocks and comparing the result with the expected output     |
    |                     |    value *In*                                                              |
+   |                     |                                                                            |
+   |                     | #. Verify that ``update_granularity()``, ``ideal_granularity()``, and      |
+   |                     |    ``output_length()`` return correct and self-consistent values           |
+   |                     |                                                                            |
+   |                     | #. Verify that ``valid_nonce_length(default_nonce_length())`` returns true |
    |                     |                                                                            |
    |                     | #. Clear the Cipher_Mode decryption object                                 |
    |                     |                                                                            |
@@ -307,6 +317,13 @@ test vectors are listed in :srcref:`src/tests/data/stream/ctr.vec`.
    |                      |                                                                          |
    |                      | #. Test the name of the mode                                             |
    |                      |                                                                          |
+   |                      | #. Verify that encrypting without setting a key throws ``Invalid_State`` |
+   |                      |                                                                          |
+   |                      | #. Verify ``valid_iv_length(default_iv_length())`` returns true and      |
+   |                      |    large IV sizes are rejected                                           |
+   |                      |                                                                          |
+   |                      | #. Verify ``buffer_size() > 0``                                          |
+   |                      |                                                                          |
    |                      | #. Set the key *Key* on the StreamCipher object                          |
    |                      |                                                                          |
    |                      | #. Set the IV *Nonce* on the StreamCipher object                         |
@@ -319,4 +336,10 @@ test vectors are listed in :srcref:`src/tests/data/stream/ctr.vec`.
    |                      | #. Calculate the ciphertext of input value *In* on the original          |
    |                      |    StreamCipher object and compare the result with the expected output   |
    |                      |    value *Out*                                                           |
+   |                      |                                                                          |
+   |                      | #. After the initial encrypt, re-encrypt after resetting IV and verify   |
+   |                      |    the same output                                                       |
+   |                      |                                                                          |
+   |                      | #. Clear the cipher and verify that post-clear encryption throws         |
+   |                      |    ``Invalid_State``                                                     |
    +----------------------+--------------------------------------------------------------------------+
