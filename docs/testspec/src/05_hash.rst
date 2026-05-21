@@ -32,7 +32,7 @@ following.
    |                       |                                                                          |
    |                       | #. Test the hash function's name                                         |
    |                       |                                                                          |
-   |                       | #. Repeat five times in a loop:                                          |
+   |                       | #. Repeat three times in a loop:                                         |
    |                       |                                                                          |
    |                       |    #. Feed the input value *In* into the hash function                   |
    |                       |                                                                          |
@@ -50,9 +50,13 @@ following.
    |                       | #. Calculate the message digest and compare with the expected output     |
    |                       |    value *Out*                                                           |
    |                       |                                                                          |
+   |                       | #. If *In* is non-empty, construct a misaligned copy of *In* and feed it |
+   |                       |    to the hash function; verify the digest matches *Out*                 |
+   |                       |                                                                          |
    |                       | #. Feed one byte from *In* into the hash function                        |
    |                       |                                                                          |
-   |                       | #. Copy HashFunction object and its state                                |
+   |                       | #. Copy HashFunction object and its state (only performed when           |
+   |                       |    ``input.size() > 5``)                                                 |
    |                       |                                                                          |
    |                       | #. Feed rest of *In* into both the original and the copied hash          |
    |                       |    functions                                                             |
@@ -71,7 +75,7 @@ following.
    +-----------------------+--------------------------------------------------------------------------+
    | **Description:**      | Known Answer Test that hashes a message in two chunks                    |
    +-----------------------+--------------------------------------------------------------------------+
-   | **Preconditions:**    | *In* must be of length n > 1 byte                                        |
+   | **Preconditions:**    | *In* must be of length n > 5 bytes                                       |
    +-----------------------+--------------------------------------------------------------------------+
    | **Input Values:**     | -  In: The test message to be hashed (varying length)                    |
    +-----------------------+--------------------------------------------------------------------------+
@@ -124,8 +128,8 @@ Test.
    |                       |                                                                          |
    |                       |       #. Feed *In[2]* into the hash function                             |
    |                       |                                                                          |
-   |                       |       #. Feed *In[0]* into the hash function and calculate the message   |
-   |                       |          digest                                                          |
+   |                       |       #. Calculate the message digest and overwrite *In[0]* with        |
+   |                       |          the result                                                      |
    |                       |                                                                          |
    |                       |       #. Swap the first and second buffer in *In*                        |
    |                       |                                                                          |
@@ -160,16 +164,23 @@ Some hash functions are also tested with very long inputs.
    +-----------------------+--------------------------------------------------------------------------+
    | **Preconditions:**    | None                                                                     |
    +-----------------------+--------------------------------------------------------------------------+
-   | **Input Values:**     | -  In: The test message to be hashed (varying length)                    |
+   | **Input Values:**     | -  Input: The test message to be hashed (varying length)                 |
    |                       |                                                                          |
-   |                       | -  TotalLength: The number of times *In* should be processed by the hash |
-   |                       |    function                                                              |
+   |                       | -  TotalLength: The total number of bytes to be hashed                   |
    +-----------------------+--------------------------------------------------------------------------+
-   | **Expected Output:**  | -  Out: Message digest (varying length depending on the hash function)   |
+   | **Expected Output:**  | -  Digest: Message digest (varying length depending on the hash          |
+   |                       |    function)                                                             |
    +-----------------------+--------------------------------------------------------------------------+
-   | **Steps:**            | #. Feed *In* *TotalLength* times into the hash function                  |
+   | **Steps:**            | #. Expand *Input* by repeating it until the buffer is at least 256 bytes |
    |                       |                                                                          |
-   |                       | #. Calculate the message digest and check that the digest matches *Out*  |
+   |                       | #. Feed the expanded buffer into the hash function *full_copies* times,  |
+   |                       |    where *full_copies* = *TotalLength* / ``len(expanded_Input)``         |
+   |                       |                                                                          |
+   |                       | #. Feed the first ``TotalLength mod len(expanded_Input)`` bytes of the   |
+   |                       |    expanded buffer                                                       |
+   |                       |                                                                          |
+   |                       | #. Calculate the message digest and check that the digest matches        |
+   |                       |    *Digest*                                                              |
    +-----------------------+--------------------------------------------------------------------------+
 
 MD-5

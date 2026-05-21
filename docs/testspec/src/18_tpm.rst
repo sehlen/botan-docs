@@ -223,12 +223,12 @@ RSA
    |                        |                                                                         |
    |                        | #. Instantiate the passed persistent RSA key pair                       |
    |                        |                                                                         |
-   |                        | #. Create a signature for a random message using the TPM                |
+   |                        | #. Create a PSS(SHA-256) signature for a random message using the TPM   |
+   |                        |                                                                         |
+   |                        | #. Verify that the created signature is verifiable using the TPM        |
    |                        |                                                                         |
    |                        | #. Verify that the created signature is verifiable with Botan's         |
    |                        |    software implementation of RSA                                       |
-   |                        |                                                                         |
-   |                        | #. Verify that the created signatures is verifiable using the TPM       |
    |                        |                                                                         |
    |                        | #. Slightly alter the signed message                                    |
    |                        |                                                                         |
@@ -284,21 +284,23 @@ RSA
    |                        | #. Instantiate the passed persistent RSA key pair using the correct     |
    |                        |    authentication value                                                 |
    |                        |                                                                         |
-   |                        | #. Encrypt the plaintext message "feedc0debaadcafe" using RSA-OAEP      |
-   |                        |    on the TPM                                                           |
+   |                        | #. Encrypt the plaintext 'feedc0debaadcafe' using OAEP(SHA-256) in     |
+   |                        |    software with the TPM's public key (encryption is a software         |
+   |                        |    operation; only decryption uses the TPM hardware)                    |
    |                        |                                                                         |
-   |                        | #. Decrypt the ciphertext using RSA-OAEP on the TPM                     |
+   |                        | #. Decrypt the ciphertext using OAEP(SHA-256) on the TPM               |
    |                        |                                                                         |
    |                        | #. Check that the plaintext and the decrypted ciphertext match          |
    |                        |                                                                         |
-   |                        | #. Encrypt the plaintext message "feedface" using RSA-OAEP in software  |
+   |                        | #. Encrypt the plaintext message "feedface" using OAEP(SHA-256) in     |
+   |                        |    software                                                             |
    |                        |                                                                         |
-   |                        | #. Decrypt the ciphertext using RSA-OAEP on the TPM                     |
+   |                        | #. Decrypt the ciphertext using OAEP(SHA-256) on the TPM               |
    |                        |                                                                         |
    |                        | #. Slightly alter the ciphertext                                        |
    |                        |                                                                         |
-   |                        | #. Decrypt the ciphertext using RSA-OAEP on the TPM and expext it to    |
-   |                        |    fail due to a padding failure.                                       |
+   |                        | #. Decrypt the ciphertext using OAEP(SHA-256) on the TPM and expect it |
+   |                        |    to fail with a ``Botan::Decoding_Error``                             |
    +------------------------+-------------------------------------------------------------------------+
 
 
@@ -333,9 +335,10 @@ RSA
    |                        | #. Encrypt the plaintext message "feedc0debaadcafe" using RSA-PKCSv1.5  |
    |                        |    via Botan's software RSA implementation                              |
    |                        |                                                                         |
-   |                        | #. Decrypt the ciphertext using RSA-RSA-PKCSv1.5 on the TPM             |
+   |                        | #. Decrypt the ciphertext using PKCS1v15 on the TPM                     |
    |                        |                                                                         |
    |                        | #. Check that the (encrypted) private blob of the key is exportable     |
+   |                        |    (transient keys only; persistent keys throw on export attempts)      |
    |                        |                                                                         |
    |                        | #. Destruct the key object and load it again from the encrypted private |
    |                        |    blob                                                                 |
@@ -381,12 +384,13 @@ ECDSA
    |                        |                                                                         |
    |                        | #. Instantiate the passed persistent ECDSA key pair                     |
    |                        |                                                                         |
-   |                        | #. Create a signature for a random message using the TPM                |
+   |                        | #. Create an ECDSA (SHA-256) signature for a random message using the   |
+   |                        |    TPM                                                                  |
+   |                        |                                                                         |
+   |                        | #. Verify that the created signature is verifiable using the TPM        |
    |                        |                                                                         |
    |                        | #. Verify that the created signature is verifiable with Botan's         |
    |                        |    software implementation of ECDSA                                     |
-   |                        |                                                                         |
-   |                        | #. Verify that the created signatures is verifiable using the TPM       |
    |                        |                                                                         |
    |                        | #. Slightly alter the signed message                                    |
    |                        |                                                                         |
@@ -437,10 +441,12 @@ ECDSA
    +------------------------+-------------------------------------------------------------------------+
    | **Expected Output:**   | n/a                                                                     |
    +------------------------+-------------------------------------------------------------------------+
-   | **Steps:**             | #. Create a TPM2 context and an authenticated session via the Storage   |
-   |                        |    Root Key                                                             |
+   | **Steps:**             | #. Create a TPM2 context and an authenticated session via the           |
+   |                        |    persistent ECC key (the SRK is used as the parent key for key        |
+   |                        |    creation, but the session salt key is the ECC persistent key)        |
    |                        |                                                                         |
-   |                        | #. Create a transient unrestricted key with the auth_value "secret"     |
+   |                        | #. Create a transient unrestricted ECDSA key on curve secp521r1 with   |
+   |                        |    the auth_value "secret"                                              |
    |                        |                                                                         |
    |                        | #. Sign a random message using the new private key on the TPM           |
    |                        |                                                                         |
