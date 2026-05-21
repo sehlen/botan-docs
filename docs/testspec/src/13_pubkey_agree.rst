@@ -230,10 +230,10 @@ described here in the following.
    +------------------------+-------------------------------------------------------------------------+
    | **Steps:**             | #. Generate a random password string of length between 1-32 characters  |
    |                        |                                                                         |
+   |                        | #. Generate a random keypair on the *Group*/*Curve*                     |
+   |                        |                                                                         |
    |                        | #. Check that the generated public key is valid and its estimated       |
    |                        |    strength satisfies the requirements                                  |
-   |                        |                                                                         |
-   |                        | #. Generate a random keypair on the *Group*/*Curve*                     |
    |                        |                                                                         |
    |                        | #. Encode the keypair as BER-encoded byte array, protected with the     |
    |                        |    password                                                             |
@@ -624,7 +624,7 @@ The following example shows an ECDH-specific KA-KEY-1 test case. The
 constraints for all the key-related test cases are:
 
 -  Curve: secp256r1, secp384r1, secp521r1, brainpool256r1,
-   brainpool384r1, frp256v1
+   brainpool384r1, brainpool512r1, frp256v1
 
 .. table::
    :class: longtable

@@ -48,7 +48,22 @@ Entropy sources are tested with the following constraints:
    |                       |       SeedCapturing_RNG pool is greater or equal to the entropy estimate |
    |                       |       returned by the entropy source                                     |
    |                       |                                                                          |
-   |                       |    b. If the entropy source added entropy to the pool in the previous    |
-   |                       |       step, check that it added at least one byte and check that it      |
-   |                       |       added entropy exactly once                                         |
+   |                       |    b. If ``rng.samples() > 0``, check that it added at least one byte   |
+   |                       |       and check that the sample count satisfies ``rng.samples() >= 1``  |
+   |                       |                                                                          |
+   |                       |    c. If ``BOTAN_HAS_COMPRESSION`` is defined and the entropy source     |
+   |                       |       produced data, for each of zlib and lzma:                          |
+   |                       |                                                                          |
+   |                       |       i.  Compress the seed material at compression level 9 and verify   |
+   |                       |           that the compressed size * 8 is greater than or equal to the   |
+   |                       |           entropy estimate reported by the source                        |
+   |                       |                                                                          |
+   |                       |       ii. Poll the entropy source a second time, concatenate both seed   |
+   |                       |           materials, compress together, and verify that the combined     |
+   |                       |           compressed size is strictly larger than the single-poll        |
+   |                       |           compressed size, and that the differential compressed size * 8 |
+   |                       |           is greater than or equal to the second poll's entropy estimate |
+   |                       |                                                                          |
+   |                       |       Note: bzip2 is intentionally excluded due to a known macOS issue   |
+   |                       |       (GitHub #394) and block-size effects on the differential test      |
    +-----------------------+--------------------------------------------------------------------------+
