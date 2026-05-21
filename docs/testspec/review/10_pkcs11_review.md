@@ -11,7 +11,7 @@
 
 - All PKCS#11 tests require a vendor-specific PKCS#11 module (HSM or SoftHSM emulator). They are not run during the regular test suite; they must be invoked with `--pkcs11-lib=<PATH>`.
 - The token under test must have User PIN set to `123456` and SO PIN set to `12345678` before running. This is confirmed by `test_pkcs11.h` (`PKCS11_USER_PIN = "123456"`, `PKCS11_SO_PIN = "12345678"`, `PKCS11_TEST_USER_PIN = "654321"`, `PKCS11_TEST_SO_PIN = "87654321"`).
-- The source registers **seven** test groups: `pkcs11-module`, `pkcs11-slot`, `pkcs11-session`, `pkcs11-object`, `pkcs11-rsa`, `pkcs11-ecdsa`, `pkcs11-ecdh`, `pkcs11-rng`, `pkcs11-x509`, `pkcs11-manage`. The spec is missing the entire **`pkcs11-object`** group (see "New Tests Found" below).
+- The source registers **ten** test groups: `pkcs11-module`, `pkcs11-slot`, `pkcs11-session`, `pkcs11-object`, `pkcs11-rsa`, `pkcs11-ecdsa`, `pkcs11-ecdh`, `pkcs11-rng`, `pkcs11-x509`, `pkcs11-manage`. The spec is missing the entire **`pkcs11-object`** group (see "New Tests Found" below).
 
 ---
 

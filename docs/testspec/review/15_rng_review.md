@@ -73,27 +73,34 @@ The spec correctly notes that the second request triggers an automatic reseed (v
 **Status:** 🔄 PROPOSED CHANGES
 **Source:** `AutoSeeded_RNG_Tests` (registered as `"auto_rng_unit"`) in `test_rng_behavior.cpp`
 **Notes:**
-1. **Step order mismatch:** The spec lists Step 1 as "empty entropy sources → throws", Step 2 as
-   "Null_RNG → throws". The code tests **Null_RNG first, empty entropy sources second**. The
-   logical meaning is the same but the order should match for traceability.
-2. **Exception type imprecision:** The spec says each of steps 1–3 "throws a PRNG_Unseeded
-   exception". The code uses `test_success` after a `try/catch(Botan::Not_Implemented&)` or
-   `catch(std::exception&)` — not specifically `PRNG_Unseeded`. The actual exception is
-   implementation-defined; the spec should not be overly specific.
-3. **Steps 10 and 11 are duplicates** (both say "Check that the AutoSeeded_RNG is seeded").
-   These correspond to two consecutive `is_seeded()` checks in the code at lines ~737/739. One
-   can be removed from the spec.
-4. **Missing edge-case steps:** The code also iterates over buffer sizes 0–4095, calling
+1. **Step order mismatch:** The spec lists Step 1 as "empty entropy sources → throws",
+   Step 2 as "Null_RNG → throws". The code tests **Null_RNG first, empty entropy sources
+   second**. The logical meaning is the same but the order should match for traceability.
+2. **BOTAN_HAS_ENTROPY_SOURCE guard:** The entropy-source construction-failure cases
+   (empty entropy sources, and useless RNG + useless entropy source) are guarded by
+   `BOTAN_HAS_ENTROPY_SOURCE`. This conditional should be noted in the spec.
+3. **Keep PRNG_Unseeded expectation:** All three construction-failure cases (Null_RNG,
+   empty entropy sources, useless RNG + useless entropy source) explicitly catch
+   `Botan::PRNG_Unseeded&`. The spec's expectation of `PRNG_Unseeded` is **correct and
+   should be kept**. The previous draft proposed weakening this to a generic exception —
+   that proposal was incorrect.
+4. **Steps 10 and 11 are duplicates** (both say "Check that the AutoSeeded_RNG is seeded").
+   These correspond to two consecutive `is_seeded()` checks in the code. One can be
+   removed from the spec.
+5. **Missing edge-case steps:** The code also iterates over buffer sizes 0–4095, calling
    `randomize` and `add_entropy` for each — a coverage check not described in the spec.
-5. **File reference:** Must be corrected from `test_rngs.cpp` to `test_rng_behavior.cpp`.
+6. **File reference:** Must be corrected from `test_rngs.cpp` to `test_rng_behavior.cpp`.
 
 **Proposed Changes:**
-- Swap Steps 1 and 2 to match code order (or add a note that order is implementation-dependent).
-- Replace "throws a PRNG_Unseeded exception" with "throws an exception (construction fails)".
-- Remove the duplicate seeded-check step (retain only one instance).
-- Add a step: "Verify that the RNG accepts arbitrary-length input and output buffers (edge-case
-  sweep over sizes 0–4095)."
-- Correct the file reference.
+- Swap Steps 1 and 2 to match code order: Null_RNG first, empty entropy sources second.
+- Add a note that the entropy-source cases (steps 2 and 3) are guarded by
+  `BOTAN_HAS_ENTROPY_SOURCE`.
+- Keep the `PRNG_Unseeded` exception type for all three construction-failure steps.
+- Remove the duplicate seeded-check step (retain only one instance of "Check that the
+  AutoSeeded_RNG is seeded").
+- Add a step: "Verify that the RNG accepts arbitrary-length input and output buffers
+  (edge-case sweep over sizes 0–4095 calling both `randomize()` and `add_entropy()`)."
+- Correct the file reference from `test_rngs.cpp` to `test_rng_behavior.cpp`.
 
 ---
 

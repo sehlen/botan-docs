@@ -218,3 +218,23 @@ round-trip test covering all Kyber-90s, Kyber-R3, and ML-KEM parameter sets.
 **`pubkey/kyber_helpers`** tests the internal compress/decompress functions
 (for `d ∈ {1,4,5,10,11}`) against their mathematical definitions, and verifies
 that `compress(decompress(x)) == x`.
+
+## Scope Classification for "New Tests"
+
+The tests listed above fall into three distinct categories. The current .rst text explicitly
+states that generic public-key API tests and some utility tests are **intentionally not
+discussed in detail** for Classic McEliece, FrodoKEM, and ML-KEM. This must be noted
+before treating these as simple omissions.
+
+| Test | Classification | Rationale |
+|------|----------------|-----------|
+| `cmce/cmce_utility` | **INTERNAL_POLICY_DECISION** | Five internal unit tests (field arithmetic, RNG rejection loop). The spec may intentionally omit low-level implementation detail. Needs policy decision. |
+| `cmce/cmce_generic_keygen` | **GENERIC_API_OUT_OF_SCOPE** | Generic `PK_Key_Generation_Test` for CMCE. The existing .rst explicitly says generic public-key API tests are not discussed in detail for Classic McEliece. This should NOT be listed as an unqualified omission. |
+| `frodokem/frodo_keygen` | **GENERIC_API_OUT_OF_SCOPE** | Generic `PK_Key_Generation_Test` for FrodoKEM. Same scope rule applies — the .rst says generic tests are not discussed in detail for FrodoKEM. |
+| `pubkey/kyber_keygen` | **GENERIC_API_OUT_OF_SCOPE** | Generic key generation / round-trip test for ML-KEM and Kyber variants. Same scope rule applies. |
+| `pubkey/kyber_helpers` | **INTERNAL_POLICY_DECISION** | Tests compress/decompress internal functions. Policy decision needed whether implementation internals belong in the normative spec. |
+
+**Action required:** Review the scope rule in `12_pubkey_kem.rst` and decide whether to:
+1. Keep the existing exclusion and document it as `OUT_OF_SCOPE_DECISION` in the checklist.
+2. Add a brief note in the spec acknowledging these tests exist but are intentionally excluded.
+3. Promote any of the above to spec entries if the review determines they should be covered.
