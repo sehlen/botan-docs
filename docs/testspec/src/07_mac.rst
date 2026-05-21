@@ -38,6 +38,8 @@ following.
    +------------------------+-------------------------------------------------------------------------+
    | **Steps:**             | #. Create the MAC object                                                |
    |                        |                                                                         |
+   |                        | #. Check that has_keying_material() returns false                       |
+   |                        |                                                                         |
    |                        | #. Test the name of the MAC                                             |
    |                        |                                                                         |
    |                        | #. Test MAC computation fails if key is not set                         |
@@ -46,8 +48,16 @@ following.
    |                        |                                                                         |
    |                        |    #. Set the key *Key*                                                 |
    |                        |                                                                         |
+   |                        |    #. Check that has_keying_material() returns true                     |
+   |                        |                                                                         |
+   |                        |    #. For MACs requiring an IV, call start(*IV*) before update()        |
+   |                        |                                                                         |
    |                        |    #. Input *In* into the MAC, calculate the tag and compare it with    |
    |                        |       the expected output value *Out*                                   |
+   |                        |                                                                         |
+   |                        | #. For MACs that do not require an IV, also compute the MAC by calling  |
+   |                        |    update() directly without a prior start() call and compare the tag   |
+   |                        |    with *Out*                                                           |
    |                        |                                                                         |
    |                        | #. For MACs that do not require a fresh key for every message\ *        |
    |                        |    (cf.* *fresh_key_required_per_message())*                            |
@@ -114,7 +124,7 @@ following.
    +------------------------+-------------------------------------------------------------------------+
    | **Steps:**             | #. Create the MAC object                                                |
    |                        |                                                                         |
-   |                        | #. Set the key *Key*                                                    |
+   |                        | #. Set the key *Key*; for MACs requiring an IV, also call start(*IV*)   |
    |                        |                                                                         |
    |                        | #. Feed the first byte of the input value *In* into the MAC             |
    |                        |                                                                         |
@@ -124,7 +134,7 @@ following.
    |                        |                                                                         |
    |                        | #. Calculate the tag and compare with the expected output value *Out*   |
    |                        |                                                                         |
-   |                        | #. Set the key *Key*                                                    |
+   |                        | #. Set the key *Key*; for MACs requiring an IV, also call start(*IV*)   |
    |                        |                                                                         |
    |                        | #. Feed the first byte of the input value *In* into the MAC             |
    |                        |                                                                         |
@@ -132,8 +142,7 @@ following.
    |                        |                                                                         |
    |                        | #. Feed the last byte of the input value *In* into the MAC              |
    |                        |                                                                         |
-   |                        | #. Input *In* into the MAC and verify the tag with the expected output  |
-   |                        |    value *Out*                                                          |
+   |                        | #. Verify the tag with the expected output value *Out*                  |
    +------------------------+-------------------------------------------------------------------------+
 
 CMAC
@@ -321,6 +330,13 @@ The test vectors were generated with Bouncy Castle Crypto 1.54.
    |                      | #. Input *In* into the GMAC, calculate the tag and compare it with the   |
    |                      |    expected output value *Out*                                           |
    |                      |                                                                          |
+   |                      | #. Set the key *Key*                                                     |
+   |                      |                                                                          |
+   |                      | #. Set the initialization vector *IV*                                    |
+   |                      |                                                                          |
+   |                      | #. Input *In* into the GMAC, calculate the tag and compare it with the   |
+   |                      |    expected output value *Out*                                           |
+   |                      |                                                                          |
    |                      | #. Reset the GMAC                                                        |
    |                      |                                                                          |
    |                      | #. Set the key *Key*                                                     |
@@ -330,6 +346,8 @@ The test vectors were generated with Bouncy Castle Crypto 1.54.
    |                      | #. Split the input string *IN* into three arrays and invoke three update |
    |                      |    functions on the GMAC with these arrays. Calculate the tag and        |
    |                      |    compare it with the expected output value *Out*                       |
+   |                      |                                                                          |
+   |                      | #. Verify the tag using verify_mac() and compare with *Out*              |
    +----------------------+--------------------------------------------------------------------------+
 
 KMAC
@@ -370,7 +388,7 @@ The tests are taken from NIST's `KMAC_samples.pdf <https://csrc.nist.gov/CSRC/me
    | **Type:**            | Positive Test                                                            |
    +----------------------+--------------------------------------------------------------------------+
    | **Description:**     | Combined unit and known answer test that checks that reset works         |
-   |                      | correctly and calculates the GMAC tag on a test message                  |
+   |                      | correctly and calculates the KMAC tag on a test message                  |
    +----------------------+--------------------------------------------------------------------------+
    | **Preconditions:**   | None                                                                     |
    +----------------------+--------------------------------------------------------------------------+
@@ -379,7 +397,7 @@ The tests are taken from NIST's `KMAC_samples.pdf <https://csrc.nist.gov/CSRC/me
    |                      | Nonce = 0x4D7920546167676564204170706C69636174696F6E (168 bits)          |
    |                      |                                                                          |
    |                      | Key = 0x404142434445464748494A4B4C4D4E4F505152535455565758595A5B5C5D5E5F |
-   |                      |      (128 bits)                                                          |
+   |                      |      (256 bits)                                                          |
    |                      |                                                                          |
    |                      | In = 0x0001020...C4C5C6C7 (1600 bits)                                    |
    +----------------------+--------------------------------------------------------------------------+
@@ -397,6 +415,13 @@ The tests are taken from NIST's `KMAC_samples.pdf <https://csrc.nist.gov/CSRC/me
    |                      | #. Input *In* into the KMAC, calculate the tag and compare it with the   |
    |                      |    expected output value *Out*                                           |
    |                      |                                                                          |
+   |                      | #. Set the key *Key*                                                     |
+   |                      |                                                                          |
+   |                      | #. Set the nonce *Nonce*                                                 |
+   |                      |                                                                          |
+   |                      | #. Input *In* into the KMAC, calculate the tag and compare it with the   |
+   |                      |    expected output value *Out*                                           |
+   |                      |                                                                          |
    |                      | #. Reset the KMAC                                                        |
    |                      |                                                                          |
    |                      | #. Set the key *Key*                                                     |
@@ -406,4 +431,6 @@ The tests are taken from NIST's `KMAC_samples.pdf <https://csrc.nist.gov/CSRC/me
    |                      | #. Split the input string *IN* into three arrays and invoke three update |
    |                      |    functions on the KMAC with these arrays. Calculate the tag and        |
    |                      |    compare it with the expected output value *Out*                       |
+   |                      |                                                                          |
+   |                      | #. Verify the tag using verify_mac() and compare with *Out*              |
    +----------------------+--------------------------------------------------------------------------+

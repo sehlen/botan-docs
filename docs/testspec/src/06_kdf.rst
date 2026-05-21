@@ -28,13 +28,22 @@ following.
    |                        | -  Secret: The secret input used to derive the key (varying length)     |
    |                        |                                                                         |
    |                        | -  Label: A label value (varying length, optional)                      |
+   |                        |                                                                         |
+   |                        | -  IKM: Input Keying Material (varying length, optional, e.g., HKDF)    |
+   |                        |                                                                         |
+   |                        | -  XTS: Extended Text String (varying length, optional, e.g., HKDF)     |
    +------------------------+-------------------------------------------------------------------------+
    | **Expected Output:**   | -  Out: The derived key (length depending the desired output length)    |
    +------------------------+-------------------------------------------------------------------------+
    | **Steps:**             | #. Create the KDF object                                                |
    |                        |                                                                         |
-   |                        | #. *InputSalt* *(optional)*, *Secret*, and *Label* *(optional)* into    |
-   |                        |    the KDF and compare the result with the expected output value *Out*  |
+   |                        | #. Derive the key by passing *Salt* *(optional)*, *Secret*, and *Label* |
+   |                        |    *(optional)* into the KDF and compare the result with the expected   |
+   |                        |    output value *Out*                                                   |
+   |                        |                                                                         |
+   |                        | #. If the expected output is exactly 32 bytes, also derive using the    |
+   |                        |    fixed-size derive_key<32>() overload and compare the result with     |
+   |                        |    *Out*                                                                |
    |                        |                                                                         |
    |                        | #. Clone the KDF object and check that it points to a different memory  |
    |                        |    location                                                             |

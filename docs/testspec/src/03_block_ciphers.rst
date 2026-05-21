@@ -28,14 +28,23 @@ Block ciphers are tested using (1) unit tests and known answer tests that (2) en
    |                       |                                                                          |
    |                       | #. Test that block size equals or is greater than eight                  |
    |                       |                                                                          |
-   |                       | #. Test that block cipher parallel bytes equals *block size*parallel     |
-   |                       |    bytes*                                                                |
+   |                       | #. Test that block cipher parallel bytes is greater than or equal to     |
+   |                       |    *block size* multiplied by *parallelism*                              |
+   |                       |                                                                          |
+   |                       | #. Check that has_keying_material() returns false                        |
    |                       |                                                                          |
    |                       | #. Test that block cipher encryption throws an exception if key is not   |
    |                       |    set                                                                   |
    |                       |                                                                          |
    |                       | #. Test that block cipher decryption throws an exception if key is not   |
    |                       |    set                                                                   |
+   |                       |                                                                          |
+   |                       | #. Set a randomly generated key of maximum key length on the block       |
+   |                       |    cipher object                                                         |
+   |                       |                                                                          |
+   |                       | #. Encrypt random data of block size                                     |
+   |                       |                                                                          |
+   |                       | #. Clear the block cipher object                                         |
    +-----------------------+--------------------------------------------------------------------------+
 
 
@@ -58,19 +67,19 @@ Block ciphers are tested using (1) unit tests and known answer tests that (2) en
    |                       |                                                                          |
    |                       | -  In: The test message to be encrypted (varying length)                 |
    |                       |                                                                          |
-   |                       | -  Iterations: The number of encrypt operations to conduct on the input  |
-   |                       |    value *In*                                                            |
+   |                       | -  Tweak: An optional tweak value for tweakable block ciphers (varying   |
+   |                       |    length, optional)                                                     |
    +-----------------------+--------------------------------------------------------------------------+
    | **Expected Output:**  | -  Out: Ciphertext (varying length depending on the block cipher)        |
    +-----------------------+--------------------------------------------------------------------------+
    | **Steps:**            | #. Create a block cipher object                                          |
    |                       |                                                                          |
-   |                       | #. Set a randomly generated key of length *minimum key length* bits      |
+   |                       | #. Set a randomly generated key of length *maximum key length* bits      |
    |                       |                                                                          |
-   |                       | #. Generate a random plaintext of length *key length* bits and encrypt   |
+   |                       | #. Generate a random plaintext of length *block size* bits and encrypt   |
    |                       |    it                                                                    |
    |                       |                                                                          |
-   |                       | #. Reset the block cipher object                                         |
+   |                       | #. Clear the block cipher object using clear()                           |
    |                       |                                                                          |
    |                       | #. Set the key *Key* on the block cipher object                          |
    |                       |                                                                          |
@@ -82,14 +91,26 @@ Block ciphers are tested using (1) unit tests and known answer tests that (2) en
    |                       |                                                                          |
    |                       | #. Set a random key on the cloned object                                 |
    |                       |                                                                          |
-   |                       | #. Encrypt *Iterations* times the input value *In* and compare the       |
-   |                       |    result with the expected value *Out*                                  |
+   |                       | #. Encrypt the input value *In* and compare the result with the          |
+   |                       |    expected value *Out*                                                  |
    |                       |                                                                          |
-   |                       | #. Decrypt *Iterations* times the result from the previous step and      |
-   |                       |    compare with the input value *In*                                     |
+   |                       | #. Decrypt the result from the previous step and compare with the        |
+   |                       |    input value *In*                                                      |
    |                       |                                                                          |
    |                       | #. Perform steps 10-11 with input value In, but prepend a zero byte to   |
    |                       |    simulate a misaligned input buffer                                    |
+   |                       |                                                                          |
+   |                       | #. Check that has_keying_material() returns true                         |
+   |                       |                                                                          |
+   |                       | #. Clear the block cipher object using clear()                           |
+   |                       |                                                                          |
+   |                       | #. Check that has_keying_material() returns false                        |
+   |                       |                                                                          |
+   |                       | #. Check that block cipher encryption throws an exception after          |
+   |                       |    clearing                                                              |
+   |                       |                                                                          |
+   |                       | #. Check that block cipher decryption throws an exception after          |
+   |                       |    clearing                                                              |
    +-----------------------+--------------------------------------------------------------------------+
 
 
@@ -103,8 +124,8 @@ Block ciphers are tested using (1) unit tests and known answer tests that (2) en
    +-----------------------+--------------------------------------------------------------------------+
    | **Type:**             | Positive Test                                                            |
    +-----------------------+--------------------------------------------------------------------------+
-   | **Description:**      | Known Answer Test that verifies the correctness of block cipher          |
-   |                       | decryption                                                               |
+   | **Description:**      | Known Answer Test (decryption half of BLOCK-2) that verifies the         |
+   |                       | correctness of block cipher decryption                                   |
    +-----------------------+--------------------------------------------------------------------------+
    | **Preconditions:**    | None                                                                     |
    +-----------------------+--------------------------------------------------------------------------+
@@ -112,9 +133,6 @@ Block ciphers are tested using (1) unit tests and known answer tests that (2) en
    |                       |    depending on the block cipher)                                        |
    |                       |                                                                          |
    |                       | -  Out: Ciphertext (varying length depending on the block cipher)        |
-   |                       |                                                                          |
-   |                       | -  Iterations: The number of decrypt operations to conduct on the input  |
-   |                       |    value Out                                                             |
    +-----------------------+--------------------------------------------------------------------------+
    | **Expected Output:**  | -  In: The original test message (plaintext, varying length)             |
    +-----------------------+--------------------------------------------------------------------------+
@@ -122,10 +140,8 @@ Block ciphers are tested using (1) unit tests and known answer tests that (2) en
    |                       |                                                                          |
    |                       | #. Set the key *Key* on the block cipher object                          |
    |                       |                                                                          |
-   |                       | #. Encrypt *Iterations* times the value *In*                             |
-   |                       |                                                                          |
-   |                       | #. Decrypt *Iterations* times the result from the previous step and      |
-   |                       |    compare with the input value *Out*                                    |
+   |                       | #. Decrypt the ciphertext *Out* and compare the result with the          |
+   |                       |    expected output value *In*                                            |
    +-----------------------+--------------------------------------------------------------------------+
 
 AES
@@ -202,12 +218,12 @@ test vectors are listed in :srcref:`src/tests/data/block/aes.vec`.
    +-----------------------+--------------------------------------------------------------------------+
    | **Steps:**            | #. Create an AES object                                                  |
    |                       |                                                                          |
-   |                       | #. Set a randomly generated key of length *minimum key length* bits      |
+   |                       | #. Set a randomly generated key of length *maximum key length* bits      |
    |                       |                                                                          |
-   |                       | #. Generate a random plaintext of length *key length* bits and encrypt   |
+   |                       | #. Generate a random plaintext of length *block size* bits and encrypt   |
    |                       |    it                                                                    |
    |                       |                                                                          |
-   |                       | #. Reset the AES object                                                  |
+   |                       | #. Clear the AES object using clear()                                    |
    |                       |                                                                          |
    |                       | #. Set the key *Key* on the AES object                                   |
    |                       |                                                                          |
