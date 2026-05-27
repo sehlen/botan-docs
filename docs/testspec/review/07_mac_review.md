@@ -117,10 +117,21 @@ Required fields: `Key`, `In`, `Out`. Optional: `IV` (used for GMAC and KMAC).
 
 ## New Tests Found in Botan 3.12.0 Not in Spec
 
+| Test ID | Algorithm | Test Data File | First Added |
+|---------|-----------|----------------|-------------|
+| — | BLAKE2b-MAC | `blake2bmac.vec` | Pre-3.7.1 (before 2024) |
+| — | Poly1305 | `poly1305.vec` | Pre-3.7.1 (before 2024) |
+| — | SipHash | `siphash.vec` | Jan 2015 (commit b07e980) |
+| — | X9.19 MAC (ANSI) | `x919_mac.vec` | Pre-3.7.1 (before 2024) |
 
-| Test data file | Algorithm | Notes |
-|---|---|---|
-| `src/tests/data/mac/blake2bmac.vec` | BLAKE2b-MAC | Not mentioned |
-| `src/tests/data/mac/poly1305.vec` | Poly1305 | Not mentioned; requires fresh key per message |
-| `src/tests/data/mac/siphash.vec` | SipHash | Not mentioned |
-| `src/tests/data/mac/x919_mac.vec` | X9.19 MAC (ANSI) | Not mentioned |
+Additionally, `test_mac.cpp` contains a test for MAC algorithms without calling `start()` for non-nonce MACs, added in Sept 2023 (commit 799e720).
+
+### Timeline Context
+
+**SipHash** — Added in January 2015, well before the 3.7.1 baseline. The test data file and implementation were introduced when SipHash was first added to Botan. This test was missed during the previous documentation update.
+
+**BLAKE2b-MAC, Poly1305, X9.19 MAC** — All existed before the Botan 3.7.1 baseline (~mid-2024). These algorithms and their test vectors were already present in the codebase during previous documentation cycles and were missed.
+
+**GMAC** — While GMAC is documented in the spec (MAC-GMAC-1), the implementation was significantly refactored in October 2016 (commit 9ad816a) to use GHASH directly rather than GCM_Mode. This is not a new test but represents a substantial implementation change.
+
+**Conclusion:** SipHash and other MAC tests were missed during previous documentation updates. They predate the 3.7.1 baseline and should have been documented earlier.

@@ -102,15 +102,24 @@ Cipher mode tests (CBC, CTS, CFB, XTS) use `Cipher_Mode_Tests` in `src/tests/tes
 
 ## New Tests Found in Botan 3.12.0 Not in Spec
 
+| Test ID | Mode/Algorithm | Test Data File / Class | First Added |
+|---------|----------------|----------------------|-------------|
+| — | CFB | `modes/cfb.vec` | Pre-3.7.1 (before 2024) |
+| — | XTS | `modes/xts.vec` | Pre-3.7.1 (before 2024) |
+| — | CTR (Cipher_Mode) | `modes/ctr.vec` | Pre-3.7.1 (before 2024) |
+| — | ChaCha20 | `stream/chacha.vec` | Jan 2014 (commit e11024f) |
+| — | OFB | `stream/ofb.vec` | Pre-3.7.1 (before 2024) |
+| — | RC4 | `stream/rc4.vec` | Pre-3.7.1 (before 2024) |
+| — | Salsa20 | `stream/salsa20.vec` | Pre-3.7.1 (before 2024) |
+| — | SHAKE (XOF as stream) | `stream/shake.vec` | Pre-3.7.1 (before 2024) |
+| — | `Cipher_Mode_IV_Carry_Tests` | CBC, CFB, CTR IV carry | May 2017 (commit 2914fcf) |
 
-| Test data file | Mode | Notes |
-|---|---|---|
-| `src/tests/data/modes/cfb.vec` | CFB | Not mentioned in spec |
-| `src/tests/data/modes/xts.vec` | XTS | Not mentioned in spec |
-| `src/tests/data/modes/ctr.vec` | CTR (Cipher_Mode interface) | Separate from the stream/ctr.vec; used by `Cipher_Mode_IV_Carry_Tests` in `test_modes.cpp` — not mentioned |
-| `src/tests/data/stream/chacha.vec` | ChaCha20 | Stream cipher; not mentioned |
-| `src/tests/data/stream/ofb.vec` | OFB | Stream cipher mode; not mentioned |
-| `src/tests/data/stream/rc4.vec` | RC4 | Stream cipher; not mentioned |
-| `src/tests/data/stream/salsa20.vec` | Salsa20 | Stream cipher; not mentioned |
-| `src/tests/data/stream/shake.vec` | SHAKE (XOF as stream) | Stream cipher; not mentioned |
-| `Cipher_Mode_IV_Carry_Tests` | CBC, CFB, CTR IV carry-over | Separate test class for multi-message IV carry behavior; tests CBC, CFB, and CTR with sequential messages reusing the carry-over IV — not mentioned in spec |
+### Timeline Context
+
+**ChaCha20** — Stream cipher added in January 2014 (commit e11024f), well before the 3.7.1 baseline. This is a widely-used modern stream cipher that was missed in previous documentation.
+
+**Cipher_Mode_IV_Carry_Tests** — Added in May 2017 (commit 2914fcf) to test IV carry-over behavior across multiple messages in CBC, CFB, and CTR modes. This allows empty nonce to mean "continue using current cipher state." The feature and its tests predate 3.7.1 and were missed.
+
+**CFB, XTS, CTR, OFB, RC4, Salsa20, SHAKE** — All existed before the 3.7.1 baseline. These are core cipher modes and stream ciphers that have been in Botan for years and were overlooked during previous documentation updates.
+
+**Conclusion:** All these cipher mode and stream cipher tests were missed during previous documentation cycles. They existed before the 3.7.1 baseline and should have been documented earlier.

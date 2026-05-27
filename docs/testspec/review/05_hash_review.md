@@ -270,8 +270,14 @@ Also, the Expected Output label in the spec uses "Out", but the test data file (
 
 ## New Tests Found in Botan 3.12.0 Not in Spec
 
-### 1. `Invalid_Hash_Name_Tests` (registered as `hash` / `invalid_name_hash`)
-Tests that `HashFunction::create_or_throw` raises appropriate exceptions for invalid algorithm names. Specifically verifies:
+| Test ID | Class/Test | Registration | First Added |
+|---------|------------|--------------|-------------|
+| — | `Invalid_Hash_Name_Tests` | `hash` / `invalid_name_hash` | Mar 2018 (commit 30a0bc7) |
+| — | `hash_truncation_negative_tests` | `hash` / `hash_truncation` | Feb 2023 (commit 30a0bc7) |
+
+### Timeline Context
+
+**Invalid_Hash_Name_Tests** — Added in March 2018 (commit 30a0bc7) to test that `HashFunction::create_or_throw` raises appropriate exceptions for invalid algorithm names. Tests various error cases:
 - `NonExistentHash` → `Lookup_Error`
 - `Blake2b(9)` → `Invalid_Argument` with message "Bad output bits size for BLAKE2b"
 - `Comb4P(MD5,MD5)` → `Invalid_Argument` with message "Comb4P: Must use two distinct hashes"
@@ -279,32 +285,20 @@ Tests that `HashFunction::create_or_throw` raises appropriate exceptions for inv
 - `Keccak-1600(160)` → `Invalid_Argument` with message "Keccak_1600: Invalid output length 160"
 - `SHA-3(160)` → `Invalid_Argument` with message "SHA_3: Invalid output length 160"
 
-**Not covered in the spec at all.** A new negative-test section should be added.
+This test predates the 3.7.1 baseline and was missed during previous documentation.
 
-### 2. `hash_truncation_negative_tests` (registered as `hash` / `hash_truncation`, guarded by `BOTAN_HAS_TRUNCATED_HASH && BOTAN_HAS_SHA2_32`)
-Tests parameter validation for the `Truncated(...)` wrapper:
+**hash_truncation_negative_tests** — Added in February 2023 (commit 30a0bc7) to test parameter validation for the `Truncated(...)` wrapper:
 - `Truncated(SHA-256,0)` → `Invalid_Argument`
 - `Truncated(SHA-256,257)` → `Invalid_Argument` (more bits than underlying hash)
 - `Truncated(NonExistentHash-256,128)` → returns `nullptr` (not created)
 
-**Not covered in the spec.** A new negative-test entry should be added.
+This test was added relatively recently but still predates 3.7.1 and was missed.
 
-### 3. KAT coverage for additional hash algorithms present in `test_hash.cpp`
+### Additional KAT coverage for hash algorithms
+
 The `Hash_Function_Tests` class processes all `.vec` files in `src/tests/data/hash/`. The following algorithms have test vectors but are not mentioned in `05_hash.rst`:
-- `Adler32` (`adler32.vec`)
-- `Ascon-Hash256` (`ascon_hash256.vec`)
-- `BLAKE2s` (`blake2s.vec`)
-- `Comb4P` (`comp4p.vec`)
-- `CRC24` (`crc24.vec`)
-- `CRC32` (`crc32.vec`)
-- `GOST-34.11` (`gost.vec`)
-- `Keccak-1600` (`keccak.vec`)
-- `MD4` (`md4.vec`)
-- `RIPEMD-160` (`ripemd160.vec`)
-- `SM3` (`sm3.vec`)
-- `Skein-512` (`skein.vec`)
-- `Streebog-256/512` (`streebog.vec`)
-- `Truncated(SHA-256,...)` (`truncated.vec`)
-- `Whirlpool` (`whirlpool.vec`)
+- `Adler32`, `Ascon-Hash256`, `BLAKE2s`, `Comb4P`, `CRC24`, `CRC32`, `GOST-34.11`, `Keccak-1600`, `MD4`, `RIPEMD-160`, `SM3`, `Skein-512`, `Streebog-256/512`, `Truncated(SHA-256,...)`, `Whirlpool`
 
-Whether all of these require spec coverage is a scoping decision, but notably **Keccak-1600** (the underlying primitive for SHA-3 and SHAKE) and **RIPEMD-160** (widely used) may warrant explicit entries.
+All of these algorithms and their test vectors existed before the 3.7.1 baseline.
+
+**Conclusion:** The Invalid_Hash_Name_Tests and hash_truncation tests were missed during previous documentation updates. Both predate the 3.7.1 baseline and should have been documented earlier.

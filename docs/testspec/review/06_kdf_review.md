@@ -97,12 +97,24 @@ The test loads all `.vec` files under `src/tests/data/kdf/`.
 ## New Tests Found in Botan 3.12.0 Not in Spec
 
 
-| Test data file | Algorithm | Notes |
-|---|---|---|
-| `src/tests/data/kdf/kdf1.vec` | KDF1 (X9.63 / IEEE 1363a) | Different from KDF1 ISO 18033-2; not mentioned |
-| `src/tests/data/kdf/kdf2.vec` | KDF2 (ISO 18033-2) | Not mentioned anywhere in spec |
-| `src/tests/data/kdf/sp800_56a.vec` | SP800-56A KDF | ACVP-sourced vectors with HMAC and KMAC variants; not mentioned |
-| `src/tests/data/kdf/x942_prf.vec` | X9.42 PRF | Not mentioned |
-| `src/tests/data/kdf/hkdf_label.vec` | HKDF-Expand-Label | Tested by a **separate** class `HKDF_Expand_Label_Tests` (not `KDF_KAT_Tests`); not covered in spec |
+| Test ID | Algorithm | Test Data File | First Added |
+|---------|-----------|----------------|-------------|
+| — | KDF1 (X9.63 / IEEE 1363a) | `kdf1.vec` | Pre-3.7.1 (before 2024) |
+| — | KDF2 (ISO 18033-2) | `kdf2.vec` | Pre-3.7.1 (before 2024) |
+| — | SP800-56A KDF | `sp800_56a.vec` | May 2016 (commit e5f2a2b) |
+| — | X9.42 PRF | `x942_prf.vec` | Pre-3.7.1 (before 2024) |
+| — | HKDF-Expand-Label | `hkdf_label.vec` | Sept 2017 (commit c90e0e2) |
 
-The `KDF_KAT_Tests` class also accepts `IKM` and `XTS` optional fields used by certain KDFs; the spec does not document these fields.
+The `KDF_KAT_Tests` class also accepts `IKM` and `XTS` optional fields used by certain KDFs; the spec does not document these fields (label parameter added May 2016, commit 55cd86e).
+
+### Timeline Context
+
+**SP800-56A KDF** — Test vectors added in May 2016 (commit e5f2a2b) as BouncyCastle-generated vectors with HMAC and KMAC variants. This predates the 3.7.1 baseline and was missed in previous documentation.
+
+**HKDF-Expand-Label** — Added in September 2017 (commit c90e0e2) as part of TLS 1.3 development. This is tested by a separate class `HKDF_Expand_Label_Tests` (not the standard `KDF_KAT_Tests`). The implementation has been in Botan for years and was missed.
+
+**KDF label parameter** — The general KDF label parameter was added to `KDF::derive_key()` in May 2016 (commit 55cd86e) to support various KDF schemes that take a label/info parameter. This API enhancement predates 3.7.1.
+
+**KDF1, KDF2, X9.42 PRF** — All existed well before the 3.7.1 baseline. These are core KDF algorithms that have been in Botan for a long time and were overlooked during previous documentation updates.
+
+**Conclusion:** All these KDF tests were missed during previous documentation cycles. They existed before the 3.7.1 baseline and should have been documented earlier.

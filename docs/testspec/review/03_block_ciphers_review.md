@@ -124,9 +124,12 @@ The example test vector values (Key, In, Out) are correct for a standard AES-128
 
 ## New Tests Found in Botan 3.12.0 Not in Spec
 
-1. **`BlockCipher_ParallelOp_Test` (registered as `"bc_parop"`)** — `src/tests/test_block.cpp`.
-   Tests that parallel (SIMD/bitsliced) block cipher encryption and decryption produces the
-   same result as sequential 1-block-at-a-time processing, for a fixed set of ciphers:
-   AES-128, AES-192, AES-256, ARIA-128, ARIA-256, Camellia-128/-192/-256, DES, TripleDES,
-   IDEA, Noekeon, SEED, Serpent, SHACAL2, SM4. Uses 255 blocks to exercise tail-block
-   handling. A new spec entry (e.g., BLOCK-4 or BLOCK-PAROP-1) should be added.
+| Test ID | Class | Registration | File | First Added |
+|---------|-------|--------------|------|-------------|
+| — | `BlockCipher_ParallelOp_Test` | `bc_parop` | `test_block.cpp` | Feb 2026 (commit 0d5d00d) |
+
+### Timeline Context
+
+**BlockCipher_ParallelOp_Test** — Added in February 2026, well after Botan 3.7.1 baseline (~mid-2024). This test was introduced to verify that parallel (SIMD/bitsliced) block cipher encryption and decryption produces the same result as sequential 1-block-at-a-time processing. Tests a fixed set of ciphers: AES-128, AES-192, AES-256, ARIA-128, ARIA-256, Camellia-128/-192/-256, DES, TripleDES, IDEA, Noekeon, SEED, Serpent, SHACAL2, SM4. Uses 255 blocks to exercise tail-block handling.
+
+**Conclusion:** This is a new test added after the 3.7.1 documentation baseline and was not missed during previous updates.
