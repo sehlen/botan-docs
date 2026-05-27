@@ -133,6 +133,12 @@ that does not affect spec accuracy.
 
 ## New Tests Found in Botan 3.12.0 Not in Spec
 
-| Function | Registration | Description |
+| Function | Registration | First Added |
 |---|---|---|
-| `test_certstor_load_allcert()` | `"certstor"` (via `Certstor_Tests::run()`) | Loads all certificates from a directory containing a **bundled** PEM file (two concatenated certificates). Verifies that `Certificate_Store_In_Memory` loads both certs from a single multi-cert file, while `X509_Certificate` only loads the first. No spec test case exists for this. |
+| `test_certstor_load_allcert()` | `"certstor"` (via `Certstor_Tests::run()`) | Feb 2018 (commit 0e47fb6) |
+
+### Timeline Context
+
+**test_certstor_load_allcert** — Added in February 2018 (commit 0e47fb6), well before the 3.7.1 baseline. This test verifies that `Certificate_Store_In_Memory` correctly handles bundled PEM files (multiple certificates concatenated in a single file). The test loads a directory containing a two-certificate bundle and confirms that the store loads both certificates, while `X509_Certificate` only loads the first (expected single-certificate behavior). This test predates the 3.7.1 baseline and was missed during previous documentation.
+
+**Conclusion:** This certificate store test was missed during previous documentation cycles. It existed before the 3.7.1 baseline and should have been documented earlier.

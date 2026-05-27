@@ -52,10 +52,22 @@
 ## New Tests Found in Botan 3.12.0 Not in Spec
 
 
-| Test / File | Algorithm | Notes |
+| Test / File | Algorithm | First Added |
 |---|---|---|
-| `Bcrypt_PBKDF_KAT_Tests` / `src/tests/data/bcrypt_pbkdf.vec` | Bcrypt-PBKDF | Separate test class; not mentioned in spec |
-| `Scrypt_KAT_Tests` / `src/tests/data/scrypt.vec` | Scrypt | Separate test class; not mentioned in spec |
-| `Pwdhash_Tests` | All pwdhash families | Tests `tune_params()`, `default_params()`, and round-trip consistency for all PasswordHashFamily implementations; not mentioned |
-| `PGP_S2K_Iter_Test` | OpenPGP S2K iteration encoding | Tests `RFC4880_encode_count()` and `RFC4880_decode_count()` for all 256 encoded values; not mentioned |
-| `src/tests/data/pbkdf/pgp_s2k.vec` | OpenPGP S2K (KAT) | KAT for PGP S2K; tested via `PBKDF_KAT_Tests` but no spec entry for it |
+| `Bcrypt_PBKDF_KAT_Tests` / `src/tests/data/bcrypt_pbkdf.vec` | Bcrypt-PBKDF | June 2019 (commit 184a782) |
+| `Scrypt_KAT_Tests` / `src/tests/data/scrypt.vec` | Scrypt | May 2018 (commit 556aac9) |
+| `Pwdhash_Tests` | All pwdhash families | May 2019 (commit 1d283a6) |
+| `PGP_S2K_Iter_Test` | OpenPGP S2K iteration encoding | Pre-3.7.1 (before 2024) |
+| `src/tests/data/pbkdf/pgp_s2k.vec` | OpenPGP S2K (KAT) | Pre-3.7.1 (before 2024) |
+
+### Timeline Context
+
+**Scrypt** — Added in May 2018 (commit 556aac9), well before the 3.7.1 baseline. Scrypt is a widely-used memory-hard PBKDF designed to resist brute-force attacks with custom hardware. It was added to Botan years ago and was missed during previous documentation updates.
+
+**Bcrypt-PBKDF** — Added in June 2019 (commit 184a782), also before the 3.7.1 baseline. This is the OpenBSD Bcrypt-based PBKDF used in OpenSSH private key encryption. The implementation and tests predate the documentation baseline and were missed.
+
+**Pwdhash_Tests** — Added in May 2019 (commit 1d283a6) alongside Argon2 support. This test class verifies that all PasswordHashFamily implementations support the common interface methods (`tune_params()`, `default_params()`, round-trip consistency). It was added as part of the Argon2 implementation but tests all PBKDF implementations. This predates 3.7.1 and was missed.
+
+**PGP S2K** — Both the iteration encoding test and KAT vectors existed before the 3.7.1 baseline. OpenPGP S2K (String-to-Key) is a PBKDF variant used in PGP/GPG key derivation. These tests have been in Botan for years and were overlooked.
+
+**Conclusion:** All these PBKDF tests were missed during previous documentation cycles. They existed before the 3.7.1 baseline and should have been documented earlier.

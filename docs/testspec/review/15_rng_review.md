@@ -124,9 +124,19 @@ The precondition "(partially) 64-bit system" is accurate.
 
 ## New Tests Found in Botan 3.12.0 Not in Spec
 
-| Function | Registration | Description |
+| Function | Registration | First Added |
 |---|---|---|
-| `ChaCha_RNG_Tests` | `"chacha_rng"` (test_rng_kat.cpp) | KAT tests for ChaCha_RNG using vector file `rng/chacha_rng.vec`. |
-| `ChaCha_RNG_Unit_Tests` | `"chacha_rng_unit"` (test_rng_behavior.cpp) | Unit tests for ChaCha RNG paralleling HMAC_DRBG unit tests. |
-| `hmac_drbg_multiple_requests` | `"hmac_drbg_multi_request"` (test_rng_behavior.cpp) | Tests that a bulk randomize request produces the same output as the equivalent split into max-size chunks, both with and without additional input. |
-| `Processor_RNG_Tests` | `"processor_rng"` (test_rng_behavior.cpp) | Tests CPU hardware RNG (e.g., RDRAND). |
+| `ChaCha_RNG_Tests` | `"chacha_rng"` (test_rng_kat.cpp) | Aug 2017 (commit 7edeec6) |
+| `ChaCha_RNG_Unit_Tests` | `"chacha_rng_unit"` (test_rng_behavior.cpp) | Aug 2017 (commit 7edeec6) |
+| `hmac_drbg_multiple_requests` | `"hmac_drbg_multi_request"` (test_rng_behavior.cpp) | Pre-3.7.1 (before 2024) |
+| `Processor_RNG_Tests` | `"processor_rng"` (test_rng_behavior.cpp) | May 2020 (commit ad851c2) |
+
+### Timeline Context
+
+**ChaCha_RNG** — Both KAT and unit tests were added in August 2017 (commit 7edeec6), well before the 3.7.1 baseline. ChaCha_RNG is a high-performance stream cipher-based RNG using ChaCha20. The implementation includes both KAT tests (using test vectors from `rng/chacha_rng.vec`) and comprehensive unit tests (security level, reseed behavior, max bytes per request) paralleling the HMAC_DRBG test structure. This predates the 3.7.1 baseline and was missed during previous documentation.
+
+**Processor_RNG** — Added in May 2020 (commit ad851c2), also before the 3.7.1 baseline. This tests CPU hardware RNG capabilities (e.g., Intel RDRAND/RDSEED, ARM RNDR). The test verifies: name reporting, always-seeded status, clear() no-op behavior, reseed from entropy sources, and buffer sweeps for both randomize() and add_entropy(). This predates 3.7.1 and was missed.
+
+**hmac_drbg_multiple_requests** — Existed before the 3.7.1 baseline. This test verifies that requesting a large block of random data produces identical output whether generated in one bulk call or split into multiple max-size chunks. Tests both with and without additional input data. This test was overlooked during previous documentation updates.
+
+**Conclusion:** All these RNG tests were missed during previous documentation cycles. They existed before the 3.7.1 baseline and should have been documented earlier.
