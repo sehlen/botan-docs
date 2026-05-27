@@ -195,13 +195,24 @@ encapsulated key C0 and the shared secret K. The spec accurately describes this.
 ## New Tests Found in Botan 3.12.0 Not in Spec
 
 
-| Test ID | Class | Registration | File |
-|---------|-------|--------------|------|
-| — | `CMCE_Utility_Tests` | `cmce/cmce_utility` | `test_cmce.cpp` |
-| — | `CMCE_Generic_Keygen_Tests` | `cmce/cmce_generic_keygen` | `test_cmce.cpp` |
-| — | `Frodo_Keygen_Tests` | `frodokem/frodo_keygen` | `test_frodokem.cpp` |
-| — | `Kyber_Keygen_Tests` | `pubkey/kyber_keygen` | `test_kyber.cpp` |
-| — | `test_kyber_helpers` | `pubkey/kyber_helpers` | `test_kyber.cpp` |
+| Test ID | Class | Registration | File | First Added |
+|---------|-------|--------------|------|-------------|
+| — | `CMCE_Utility_Tests` | `cmce/cmce_utility` | `test_cmce.cpp` | Nov 2024 (commit c256e1c) |
+| — | `CMCE_Generic_Keygen_Tests` | `cmce/cmce_generic_keygen` | `test_cmce.cpp` | Nov 2024 (commit c256e1c) |
+| — | `Frodo_Keygen_Tests` | `frodokem/frodo_keygen` | `test_frodokem.cpp` | Jan 2024 (commit 21b52d3) |
+| — | `Kyber_Keygen_Tests` | `pubkey/kyber_keygen` | `test_kyber.cpp` | Jan 2023 (commit 7025017) |
+| — | `test_kyber_helpers` | `pubkey/kyber_helpers` | `test_kyber.cpp` | Oct 2024 (commit 7cd161a, ML-KEM standardization) |
+
+**Timeline Context:**
+
+Based on commit history analysis:
+- **Previous docs baseline (3.7.1)**: Released ~mid-2024
+- **Classic McEliece tests** (Nov 2024): Added in Botan 3.11.0+ after 3.7.1 baseline → **New tests, not missed**
+- **FrodoKEM keygen test** (Jan 2024): Added in Botan 3.9.0, likely before or around 3.7.1 → **Possibly missed during 3.7.1 docs**
+- **Kyber keygen test** (Jan 2023): Added in Botan 3.4.0, well before 3.7.1 → **Missed during previous docs update**
+- **Kyber helpers test** (Oct 2024): Added with ML-KEM FIPS 203 standardization in 3.11.0+ → **New tests, not missed**
+
+**Conclusion**: The Kyber_Keygen_Tests was missed during the 3.7.1 documentation update. FrodoKEM and Classic McEliece tests were added after that baseline, so these represent new gaps rather than documentation oversights.
 
 **`cmce/cmce_utility`** contains five internal unit tests: seed expansion
 against a reference, irreducible polynomial generation, GF inversion, GF
