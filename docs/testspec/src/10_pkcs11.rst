@@ -122,29 +122,6 @@ successfully.
    :widths: 20 80
 
    +---------------------+----------------------------------------------------------------------------+
-   | **Test Case No.:**  | PKCS11-MODULE-5                                                            |
-   +=====================+============================================================================+
-   | **Type:**           | Negative Test                                                              |
-   +---------------------+----------------------------------------------------------------------------+
-   | **Description:**    | Attempt to load the same module twice                                      |
-   +---------------------+----------------------------------------------------------------------------+
-   | **Preconditions:**  | None                                                                       |
-   +---------------------+----------------------------------------------------------------------------+
-   | **Input Values:**   | Module Path = *--pkcs11-lib path*                                          |
-   +---------------------+----------------------------------------------------------------------------+
-   | **Expected          | An error occurs                                                            |
-   | Output:**           |                                                                            |
-   +---------------------+----------------------------------------------------------------------------+
-   | **Steps:**          | #. Load a Module from *Module Path*                                        |
-   |                     |                                                                            |
-   |                     | #. Load a second Module from the same *Module Path*                        |
-   +---------------------+----------------------------------------------------------------------------+
-
-.. table::
-   :class: longtable
-   :widths: 20 80
-
-   +---------------------+----------------------------------------------------------------------------+
    | **Test Case No.:**  | PKCS11-MODULE-6                                                            |
    +=====================+============================================================================+
    | **Type:**           | Positive Test                                                              |
@@ -602,6 +579,185 @@ with a token.
    |                     | #. Log into the Session with the SO PIN                                    |
    +---------------------+----------------------------------------------------------------------------+
 
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +---------------------+----------------------------------------------------------------------------+
+   | **Test Case No.:**  | PKCS11-SESSION-9                                                           |
+   +=====================+============================================================================+
+   | **Type:**           | Positive Test                                                              |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Description:**    | Verify session state transitions after opening a session and logging in    |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Preconditions:**  | At least one token must be connected                                       |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Input Values:**   | Module Path = *--pkcs11-lib path*                                          |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Expected          | Session state progresses from RwPublicSession to RwUserFunctions after     |
+   | Output:**           | login                                                                      |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Steps:**          | #. Load a Module from *Module Path* and open a read-write Session          |
+   |                     |                                                                            |
+   |                     | #. Retrieve session info and verify ``info.slotID`` matches the slot and   |
+   |                     |    ``info.state == SessionState::RwPublicSession``                         |
+   |                     |                                                                            |
+   |                     | #. Log in as User                                                          |
+   |                     |                                                                            |
+   |                     | #. Retrieve session info again and verify                                  |
+   |                     |    ``info.state == SessionState::RwUserFunctions``                         |
+   +---------------------+----------------------------------------------------------------------------+
+
+Object Tests
+------------
+
+Object tests check that PKCS#11 data objects can be created, found,
+modified, copied, and destroyed in the token.
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +---------------------+----------------------------------------------------------------------------+
+   | **Test Case No.:**  | PKCS11-OBJECT-1                                                            |
+   +=====================+============================================================================+
+   | **Type:**           | Positive Test                                                              |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Description:**    | Test ``AttributeContainer`` operations                                     |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Preconditions:**  | At least one token must be connected                                       |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Input Values:**   | Module Path = *--pkcs11-lib path*                                          |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Expected          | None                                                                       |
+   | Output:**           |                                                                            |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Steps:**          | #. Add class, string, binary, boolean, and numeric attributes to an        |
+   |                     |    ``AttributeContainer``                                                  |
+   |                     |                                                                            |
+   |                     | #. Overwrite an existing numeric attribute                                 |
+   |                     |                                                                            |
+   |                     | #. Verify the total attribute count and the type/value of each attribute   |
+   +---------------------+----------------------------------------------------------------------------+
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +---------------------+----------------------------------------------------------------------------+
+   | **Test Case No.:**  | PKCS11-OBJECT-2                                                            |
+   +=====================+============================================================================+
+   | **Type:**           | Positive Test                                                              |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Description:**    | Create and destroy a data object in the token                              |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Preconditions:**  | At least one token must be connected                                       |
+   |                     |                                                                            |
+   |                     | A read-write session is open with the token using the User PIN             |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Input Values:**   | Module Path = *--pkcs11-lib path*                                          |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Expected          | None                                                                       |
+   | Output:**           |                                                                            |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Steps:**          | #. Create a data object with label, value, application, and object ID      |
+   |                     |    properties                                                              |
+   |                     |                                                                            |
+   |                     | #. Verify the data object was created successfully                         |
+   |                     |                                                                            |
+   |                     | #. Destroy the data object in the token                                    |
+   +---------------------+----------------------------------------------------------------------------+
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +---------------------+----------------------------------------------------------------------------+
+   | **Test Case No.:**  | PKCS11-OBJECT-3                                                            |
+   +=====================+============================================================================+
+   | **Type:**           | Positive Test                                                              |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Description:**    | Get and set attribute values on a data object                              |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Preconditions:**  | At least one token must be connected                                       |
+   |                     |                                                                            |
+   |                     | A read-write session is open with the token using the User PIN             |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Input Values:**   | Module Path = *--pkcs11-lib path*                                          |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Expected          | None                                                                       |
+   | Output:**           |                                                                            |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Steps:**          | #. Create a data object in the token                                       |
+   |                     |                                                                            |
+   |                     | #. Read the ``Label`` attribute from the object                            |
+   |                     |                                                                            |
+   |                     | #. Modify the label attribute                                              |
+   |                     |                                                                            |
+   |                     | #. Re-read the label and verify the updated value                          |
+   |                     |                                                                            |
+   |                     | #. Destroy the data object                                                 |
+   +---------------------+----------------------------------------------------------------------------+
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +---------------------+----------------------------------------------------------------------------+
+   | **Test Case No.:**  | PKCS11-OBJECT-4                                                            |
+   +=====================+============================================================================+
+   | **Type:**           | Positive Test                                                              |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Description:**    | Find objects in the token by attribute                                     |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Preconditions:**  | At least one token must be connected                                       |
+   |                     |                                                                            |
+   |                     | A read-write session is open with the token using the User PIN             |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Input Values:**   | Module Path = *--pkcs11-lib path*                                          |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Expected          | None                                                                       |
+   | Output:**           |                                                                            |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Steps:**          | #. Create a data object in the token                                       |
+   |                     |                                                                            |
+   |                     | #. Use ``ObjectFinder`` and ``Object::search<Object>()`` to find the       |
+   |                     |    object by label                                                         |
+   |                     |                                                                            |
+   |                     | #. Verify the found object matches by Application and Label attributes     |
+   |                     |                                                                            |
+   |                     | #. Destroy the data object                                                 |
+   +---------------------+----------------------------------------------------------------------------+
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +---------------------+----------------------------------------------------------------------------+
+   | **Test Case No.:**  | PKCS11-OBJECT-5                                                            |
+   +=====================+============================================================================+
+   | **Type:**           | Positive Test                                                              |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Description:**    | Copy a data object in the token                                            |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Preconditions:**  | At least one token must be connected                                       |
+   |                     |                                                                            |
+   |                     | A read-write session is open with the token using the User PIN             |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Input Values:**   | Module Path = *--pkcs11-lib path*                                          |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Expected          | None                                                                       |
+   | Output:**           |                                                                            |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Steps:**          | #. Create a data object in the token                                       |
+   |                     |                                                                            |
+   |                     | #. Copy the object with a new label via ``data_obj.copy(copy_attributes)`` |
+   |                     |                                                                            |
+   |                     | #. Verify the copy is findable by ``ObjectFinder``                         |
+   |                     |                                                                            |
+   |                     | #. Destroy both the original and copied objects                            |
+   +---------------------+----------------------------------------------------------------------------+
+
 RSA Tests
 ---------
 
@@ -695,7 +851,7 @@ verification and encryption and decryption.
    | **Steps:**          | #. Generate a random 2048 bits RSA keypair                                 |
    |                     |                                                                            |
    |                     | #. Set the RSA key to be a token key, to not be a private token object and |
-   |                     |    to be a decryption key                                                  |
+   |                     |    to be an encryption key                                                 |
    |                     |                                                                            |
    |                     | #. Import the RSA public key into the token using the read-write session   |
    |                     |                                                                            |
@@ -1378,7 +1534,8 @@ and verification.
    |                     |                                                                            |
    |                     |    -  label = “Botan test ecdsa pub key”                                   |
    |                     |                                                                            |
-   |                     | 3. Export the public key and compare it with the generated public key      |
+   |                     | 3. Export the public key and verify that the export operation completes    |
+   |                     |    successfully                                                            |
    |                     |                                                                            |
    |                     | 4. Destroy the ECDSA key in the token                                      |
    +---------------------+----------------------------------------------------------------------------+
@@ -1400,7 +1557,7 @@ and verification.
    +---------------------+----------------------------------------------------------------------------+
    | **Input Values:**   | Module Path = *--pkcs11-lib path*                                          |
    |                     |                                                                            |
-   |                     | Curve = secp256r1, brainpool512r1                                          |
+   |                     | Curve = secp256r1                                                          |
    +---------------------+----------------------------------------------------------------------------+
    | **Expected          | None                                                                       |
    | Output:**           |                                                                            |
@@ -1441,7 +1598,7 @@ and verification.
    +---------------------+----------------------------------------------------------------------------+
    | **Steps:**          | #. Generate an ECDSA keypair in the token with the following properties:   |
    |                     |                                                                            |
-   |                     |    -  curve = secp256r1                                                    |
+   |                     |    -  curve = secp256r1 and brainpool512r1 (both tested)                   |
    |                     |                                                                            |
    |                     |    -  public key label = “BOTAN_TEST_ECDSA_PUB_KEY”                        |
    |                     |                                                                            |
@@ -1479,11 +1636,16 @@ and verification.
    +=====================+============================================================================+
    | **Type:**           | Positive Test                                                              |
    +---------------------+----------------------------------------------------------------------------+
-   | **Description:**    | Sign and verify a message in the token with no padding                     |
+   | **Description:**    | Sign and verify a message in the token using SHA-256, SHA-256/DER, and    |
+   |                     | Raw padding across secp256r1 and brainpool512r1 curves; SHA-256 variants  |
+   |                     | are skipped on SoftHSMv2                                                  |
    +---------------------+----------------------------------------------------------------------------+
    | **Preconditions:**  | At least one token must be connected                                       |
    |                     |                                                                            |
    |                     | A read-write session is open with the token using the User PIN             |
+   |                     |                                                                            |
+   |                     | Note: SHA-256 and SHA-256/DER signing mechanisms may be skipped on         |
+   |                     | SoftHSMv2 (manufacturer-specific limitation)                               |
    |                     |                                                                            |
    |                     | An ECDSA keypair was generated with the following properties:              |
    |                     |                                                                            |
@@ -1518,15 +1680,49 @@ and verification.
    | **Expected          | None                                                                       |
    | Output:**           |                                                                            |
    +---------------------+----------------------------------------------------------------------------+
-   | **Steps:**          | #. Sign the *Message* using the ECDSA private key in the token             |
+   | **Steps:**          | #. Sign the *Message* using Raw, SHA-256, and SHA-256/DER with the        |
+   |                     |    ECDSA private key in the token (SHA-256 variants skipped on SoftHSM)   |
    |                     |                                                                            |
-   |                     | #. Verify the resulting signature in the token                             |
+   |                     | #. Verify each resulting signature in the token                            |
    |                     |                                                                            |
-   |                     | #. Verify the resulting signature using the software implementation        |
+   |                     | #. Verify each resulting signature using the software implementation       |
    |                     |                                                                            |
    |                     | #. Destroy the token private key                                           |
    |                     |                                                                            |
    |                     | #. Destroy the token public key                                            |
+   +---------------------+----------------------------------------------------------------------------+
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +---------------------+----------------------------------------------------------------------------+
+   | **Test Case No.:**  | PKCS11-ECDSA-8                                                             |
+   +=====================+============================================================================+
+   | **Type:**           | Positive Test                                                              |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Description:**    | Sign and verify using a key with explicit (DER-encoded) curve parameters   |
+   |                     | rather than a named curve OID                                              |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Preconditions:**  | At least one token must be connected                                       |
+   |                     |                                                                            |
+   |                     | A read-write session is open with the token using the User PIN             |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Input Values:**   | Module Path = *--pkcs11-lib path*                                          |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Expected          | None                                                                       |
+   | Output:**           |                                                                            |
+   +---------------------+----------------------------------------------------------------------------+
+   | **Steps:**          | #. Generate an ECDSA keypair using explicit curve parameters               |
+   |                     |    (``EC_Group_Encoding::Explicit``) for secp256r1 and brainpool512r1      |
+   |                     |                                                                            |
+   |                     | #. Sign a test message using the private key in the token                  |
+   |                     |                                                                            |
+   |                     | #. Verify the signature in the token                                       |
+   |                     |                                                                            |
+   |                     | #. Verify the signature using the software implementation                  |
+   |                     |                                                                            |
+   |                     | #. Destroy the token keys                                                  |
    +---------------------+----------------------------------------------------------------------------+
 
 ECDH Tests
@@ -1781,6 +1977,9 @@ ECDH Tests
    | **Preconditions:**  | At least one token must be connected                                       |
    |                     |                                                                            |
    |                     | A read-write session is open with the token using the User PIN             |
+   |                     |                                                                            |
+   |                     | Note: derivation uses ``PK_Key_Agreement`` with Raw KDF (``CKD_NULL``);   |
+   |                     | SoftHSMv2 only supports ``CKD_NULL``, so other KDFs are not tested here   |
    +---------------------+----------------------------------------------------------------------------+
    | **Input Values:**   | Module Path = *--pkcs11-lib path*                                          |
    |                     |                                                                            |
@@ -1902,6 +2101,9 @@ Random Generator Tests
    | **Preconditions:**  | At least one token must be connected                                       |
    |                     |                                                                            |
    |                     | A read-only session is open with the token using the User PIN              |
+   |                     |                                                                            |
+   |                     | Requires ``BOTAN_HAS_HMAC_DRBG`` and ``BOTAN_HAS_SHA2_64`` to be enabled  |
+   |                     | at compile time; if either is absent the test is silently skipped          |
    +---------------------+----------------------------------------------------------------------------+
    | **Input Values:**   | Module Path = *--pkcs11-lib path*                                          |
    +---------------------+----------------------------------------------------------------------------+
@@ -1943,11 +2145,14 @@ X.509 tests load an X.509 certificate into a token.
    +---------------------+----------------------------------------------------------------------------+
    | **Preconditions:**  | At least one token must be connected                                       |
    |                     |                                                                            |
-   |                     | A read-only session is open with the token using the User PIN              |
+   |                     | A read-write session is open with the token using the User PIN             |
+   |                     |                                                                            |
+   |                     | Filesystem access must be available (``BOTAN_TARGET_OS_HAS_FILESYSTEM``);  |
+   |                     | on platforms without filesystem support the test returns empty results     |
    +---------------------+----------------------------------------------------------------------------+
    | **Input Values:**   | Module Path = *--pkcs11-lib path*                                          |
    |                     |                                                                            |
-   |                     | Certificate File = “src/tests/data/nist_x509/test01/end.crt”               |
+   |                     | Certificate File = "src/tests/data/x509/nist/test01/end.crt"               |
    +---------------------+----------------------------------------------------------------------------+
    | **Expected          | None                                                                       |
    | Output:**           |                                                                            |

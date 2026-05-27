@@ -228,7 +228,8 @@ tests are in *src/tests/data/pubkey/frodokem_kat.vec*.
    |                        |    original private key. Expect a decryption failure.                   |
    |                        |                                                                         |
    |                        | #. Truncate the ciphertext by a single byte and attempt a decapsulation |
-   |                        |    with the original private key. Expect a decryption failure.          |
+   |                        |    with the original private key. Expect an exception with the message  |
+                        |    'FrodoKEM ciphertext does not have the correct byte count'.          |
    +------------------------+-------------------------------------------------------------------------+
 
 ML-KEM
@@ -356,7 +357,8 @@ instances are in :srcref:`[src/tests/data/pubkey]/kyber_kat.vec`.
    +------------------------+-------------------------------------------------------------------------+
    | **Expected Output:**   | None                                                                    |
    +------------------------+-------------------------------------------------------------------------+
-   | **Steps:**             | #. Generate a kyber key pair (one for each ML-KEM or Kyber instance).   |
+   | **Steps:**             | #. Generate an ML-KEM (or Kyber) key pair (one for each supported       |
+   |                        |    instance).                                                           |
    |                        |                                                                         |
    |                        | #. Encode both the public and private key using the default encoding.   |
    |                        |                                                                         |
@@ -367,7 +369,13 @@ instances are in :srcref:`[src/tests/data/pubkey]/kyber_kat.vec`.
    |                        | #. Reverse the bytes of another copy of the ciphertext                  |
    |                        |                                                                         |
    |                        | #. Decode the private key and try to decapsulate both altered           |
-   |                        |    ciphertexts. Expect a failure in both cases.                         |
+   |                        |    ciphertexts:                                                         |
+                        |                                                                         |
+                        |    - For the truncated ciphertext: expect an exception with the message |
+                        |      'Kyber: unexpected ciphertext length'.                             |
+                        |    - For the reversed ciphertext: expect that decapsulation succeeds   |
+                        |      but produces a different shared secret than the one from Step 3   |
+                        |      (implicit rejection, no exception thrown).                         |
    |                        |                                                                         |
    |                        | #. Decapsulate the original ciphertext and expect that the resulting    |
    |                        |    shared secret is equal to the one encapsulated before.               |
@@ -398,6 +406,17 @@ instances are in :srcref:`[src/tests/data/pubkey]/kyber_kat.vec`.
    |                        |                                                                         |
    |                        | #. Otherwise re-encode the public and private keys and validate that    |
    |                        |    the result is byte-compatible with the input values.                 |
+   |                        |                                                                         |
+   |                        | #. If the decoded private key is in seed (compact) format:              |
+   |                        |                                                                         |
+   |                        |    - Verify that re-encoding in seed format is byte-compatible with     |
+   |                        |      the input.                                                         |
+   |                        |    - Derive the expanded encoding from the seed key and confirm it is   |
+   |                        |      self-consistent.                                                   |
+   |                        |    - Verify that requesting seed format from an expanded key raises a   |
+   |                        |      Botan::Encoding_Error.                                         |
+   |                        |    - Perform an encap/decap roundtrip using the expanded key to         |
+   |                        |      confirm functional equivalence.                                    |
    +------------------------+-------------------------------------------------------------------------+
 
 

@@ -408,7 +408,8 @@ algorithms. These test cases are equal for all public key schemes and are
 therefore not discussed in detail in this chapter.
 
 All ML-DSA-specific test code can be found in
-:srcref:`src/tests/test_dilithium.cpp`. Relevant test data vectors for the KAT tests
+:srcref:`src/tests/test_dilithium.cpp` and :srcref:`src/tests/test_ml_dsa.cpp`.
+Relevant test data vectors for the KAT tests
 are in
 :srcref:`[src/tests/data/pubkey]/ml-dsa-4x4_Deterministic.vec`,
 :srcref:`[src/tests/data/pubkey]/ml-dsa-4x4_Randomized.vec`,
@@ -1255,7 +1256,7 @@ The constraints for this test case are:
    :widths: 20 80
 
    +------------------------+-------------------------------------------------------------------------+
-   | **Test Case No.:**     | PKSIG-KEY-ECDSA-1                                                       |
+   | **Test Case No.:**     | PKSIG-KEY-ECKCDSA-1                                                     |
    +========================+=========================================================================+
    | **Type:**              | Positive Test                                                           |
    +------------------------+-------------------------------------------------------------------------+
@@ -1480,7 +1481,7 @@ PKSIG-RSA-3 are listed in :srcref:`src/tests/data/pubkey/rsa_invalid.vec`.
    :widths: 20 80
 
    +------------------------+-------------------------------------------------------------------------+
-   | **Test Case No.:**     | PKSIG-3                                                                 |
+   | **Test Case No.:**     | PKSIG-RSA-3                                                                 |
    +========================+=========================================================================+
    | **Type:**              | Negative Test                                                           |
    +------------------------+-------------------------------------------------------------------------+
@@ -1782,7 +1783,7 @@ constraints:
 
 The hash function and algorithm parameters “w”, “h” are provided through
 the algorithm oid, which is part of the private key. Test vectors for
-the test case PKSIG-XMSS-2 and PKCS-XMSS-3 are listed in
+the test case PKSIG-XMSS-2 and PKSIG-XMSS-3 are listed in
 :srcref:`src/tests/data/pubkey/xmss_verify.vec` and in
 :srcref:`src/tests/data/pubkey/xmss_invalid.vec`, correspondingly.The following
 table shows an example test case with one test vector.

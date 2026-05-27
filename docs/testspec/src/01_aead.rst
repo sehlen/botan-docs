@@ -21,7 +21,8 @@ following.
    +----------------------+---------------------------------------------------------------------------+
    | **Preconditions:**   | None                                                                      |
    +----------------------+---------------------------------------------------------------------------+
-   | **Input Values:**    | -  Block Cipher: The underlying block cipher, e.g., AES-128 or AES-256    |
+   | **Input Values:**    | -  Algorithm: The full AEAD algorithm name (e.g., AES-128/GCM,            |
+   |                      |    ChaCha20Poly1305)                                                      |
    |                      |                                                                           |
    |                      | -  Key: The encryption/decryption key used for the block cipher (varying  |
    |                      |    length depending on the block cipher)                                  |
@@ -40,6 +41,8 @@ following.
    |                      |                                                                           |
    |                      | #. Check that the AEAD mode accepts nonces of the default nonce length    |
    |                      |                                                                           |
+   |                      | #. Check that has_keying_material() returns false                         |
+   |                      |                                                                           |
    |                      | #. Check that trying to encrypt a random value before setting a key       |
    |                      |    throws an exception                                                    |
    |                      |                                                                           |
@@ -48,6 +51,8 @@ following.
    |                      |    throws an exception                                                    |
    |                      |                                                                           |
    |                      | #. Set the key *Key* on the AEAD_Encryption object                        |
+   |                      |                                                                           |
+   |                      | #. Check that has_keying_material() returns true                          |
    |                      |                                                                           |
    |                      | #. Check that trying to encrypt a random value before setting a nonce     |
    |                      |    throws an exception                                                    |
@@ -74,14 +79,15 @@ following.
    |                      |                                                                           |
    |                      | #. If *In* is the empty message, Return                                   |
    |                      |                                                                           |
-   |                      | #. If *In* is longer than the block size of the AEAD mode, calculate the  |
-   |                      |    ciphertext of input value *In* by encrypting *In* in block size blocks |
-   |                      |    and comparing the result with the expected output value *Out*          |
+   |                      | #. If *In* is longer than the update granularity of the AEAD mode,        |
+   |                      |    calculate the ciphertext of input value *In* by encrypting *In* in     |
+   |                      |    update granularity blocks and comparing the result with the expected   |
+   |                      |    output value *Out*                                                     |
    |                      |                                                                           |
-   |                      | #. If *In* is longer than the block size of the AEAD mode, calculate the  |
-   |                      |    ciphertext of input value *In* by encrypting *In* in multiples of      |
-   |                      |    block size blocks and comparing the result with the expected output    |
-   |                      |    value *Out*                                                            |
+   |                      | #. If *In* is longer than the update granularity of the AEAD mode,        |
+   |                      |    calculate the ciphertext of input value *In* by encrypting *In* in     |
+   |                      |    multiples of the update granularity and comparing the result with the  |
+   |                      |    expected output value *Out*                                            |
    |                      |                                                                           |
    |                      | #. Clear the AEAD_Encryption object                                       |
    |                      |                                                                           |
@@ -106,7 +112,8 @@ following.
    +----------------------+---------------------------------------------------------------------------+
    | **Preconditions:**   | None                                                                      |
    +----------------------+---------------------------------------------------------------------------+
-   | **Input Values:**    | -  Block Cipher: The underlying block cipher, e.g., AES-128 or AES-256    |
+   | **Input Values:**    | -  Algorithm: The full AEAD algorithm name (e.g., AES-128/GCM,            |
+   |                      |    ChaCha20Poly1305)                                                      |
    |                      |                                                                           |
    |                      | -  Key: The encryption/decryption key used for the block cipher (varying  |
    |                      |    length depending on the block cipher)                                  |
@@ -125,6 +132,8 @@ following.
    |                      |                                                                           |
    |                      | #. Check that the AEAD mode accepts nonces of the default nonce length    |
    |                      |                                                                           |
+   |                      | #. Check that has_keying_material() returns false                         |
+   |                      |                                                                           |
    |                      | #. Check that trying to decrypt a random value before setting a key       |
    |                      |    throws an exception                                                    |
    |                      |                                                                           |
@@ -132,7 +141,9 @@ following.
    |                      |    associated data, check that setting *AD* on the AEAD_Decryption object |
    |                      |    throws an exception                                                    |
    |                      |                                                                           |
-   |                      | #. Set the key *Key* on the AEAD_Encryption object                        |
+   |                      | #. Set the key *Key* on the AEAD_Decryption object                        |
+   |                      |                                                                           |
+   |                      | #. Check that has_keying_material() returns true                          |
    |                      |                                                                           |
    |                      | #. Check that trying to decrypt a random value before setting a nonce     |
    |                      |    throws an exception                                                    |
@@ -162,14 +173,15 @@ following.
    |                      | #. Calculate the plaintext of input value *Out* and compare the result    |
    |                      |    with the expected output value *In*                                    |
    |                      |                                                                           |
-   |                      | #. If *Out* is longer than the block size of the AEAD mode, calculate the |
-   |                      |    plaintext of input value *Out* by decrypting *Out* in block size       |
-   |                      |    blocks and comparing the result with the expected output value *In*    |
+   |                      | #. If *Out* is longer than the update granularity of the AEAD mode,       |
+   |                      |    calculate the plaintext of input value *Out* by decrypting *Out* in    |
+   |                      |    update granularity blocks and comparing the result with the expected   |
+   |                      |    output value *In*                                                      |
    |                      |                                                                           |
-   |                      | #. If *Out* is longer than the block size of the AEAD mode, calculate the |
-   |                      |    plaintext of input value *Out* by decrypting *Out* in multiples of     |
-   |                      |    block size blocks and comparing the result with the expected output    |
-   |                      |    value *In*                                                             |
+   |                      | #. If *Out* is longer than the update granularity of the AEAD mode,       |
+   |                      |    calculate the plaintext of input value *Out* by decrypting *Out* in    |
+   |                      |    multiples of the update granularity and comparing the result with the  |
+   |                      |    expected output value *In*                                             |
    |                      |                                                                           |
    |                      | #. Clear the AEAD_Decryption object                                       |
    |                      |                                                                           |
@@ -195,7 +207,8 @@ following.
    +----------------------+---------------------------------------------------------------------------+
    | **Preconditions:**   | None                                                                      |
    +----------------------+---------------------------------------------------------------------------+
-   | **Input Values:**    | -  Block Cipher: The underlying block cipher, e.g., AES-128 or AES-256    |
+   | **Input Values:**    | -  Algorithm: The full AEAD algorithm name (e.g., AES-128/GCM,            |
+   |                      |    ChaCha20Poly1305)                                                      |
    |                      |                                                                           |
    |                      | -  Key: The encryption/decryption key used for the block cipher (varying  |
    |                      |    length depending on the block cipher)                                  |
@@ -219,8 +232,10 @@ following.
    |                      | #. Create a modified version of *Out*, by changing the length of Out or   |
    |                      |    by flipping random bits in *Out*                                       |
    |                      |                                                                           |
-   |                      | #. Calculate the plaintext of the modified *Out*, which should throw an   |
-   |                      |    exception                                                              |
+   |                      | #. Calculate the plaintext of the modified *Out*; this should throw a     |
+   |                      |    Botan::Integrity_Failure exception                                     |
+   |                      |                                                                           |
+   |                      | #. Reset the AEAD_Decryption object                                       |
    |                      |                                                                           |
    |                      | If *Nonce* is of length n > 0:                                            |
    |                      |                                                                           |
@@ -229,20 +244,22 @@ following.
    |                      |                                                                           |
    |                      | 8. Set the modified nonce on the AEAD_Decryption object                   |
    |                      |                                                                           |
-   |                      | 9. Calculate the plaintext of the original ciphertext *Out*, which should |
-   |                      |    throw an exception                                                     |
+   |                      | 9. Calculate the plaintext of the original ciphertext *Out*; this should  |
+   |                      |    throw a Botan::Integrity_Failure exception                             |
+   |                      |                                                                           |
+   |                      | 10. Reset the AEAD_Decryption object                                      |
    |                      |                                                                           |
    |                      | End If                                                                    |
    |                      |                                                                           |
-   |                      | 10. Create a modified version of *AD*, by changing the length of *AD* or  |
+   |                      | 11. Create a modified version of *AD*, by changing the length of *AD* or  |
    |                      |     by flipping random bits in *AD*                                       |
    |                      |                                                                           |
-   |                      | 11. Set the modified associated data on the *AEAD*\_Decryption object     |
+   |                      | 12. Set the modified associated data on the *AEAD*\_Decryption object     |
    |                      |                                                                           |
-   |                      | 12. Set the nonce *Nonce* on the AEAD\_ Decryption object                 |
+   |                      | 13. Set the nonce *Nonce* on the AEAD\_ Decryption object                 |
    |                      |                                                                           |
-   |                      | 13. Calculate the plaintext of the original ciphertext *Out*, which       |
-   |                      |     should throw an exception                                             |
+   |                      | 14. Calculate the plaintext of the original ciphertext *Out*; this        |
+   |                      |     should throw a Botan::Integrity_Failure exception                     |
    +----------------------+---------------------------------------------------------------------------+
 
 GCM

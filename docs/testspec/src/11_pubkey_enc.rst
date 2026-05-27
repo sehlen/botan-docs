@@ -93,7 +93,7 @@ test vectors are listed in :srcref:`src/tests/data/pubkey/dlies.vec`.
    +========================+=========================================================================+
    | **Type:**              | Negative Test                                                           |
    +------------------------+-------------------------------------------------------------------------+
-   | **Description:**       | Invalid signatures should not verify                                    |
+   | **Description:**       | Invalid ciphertexts should not decrypt correctly                        |
    +------------------------+-------------------------------------------------------------------------+
    | **Preconditions:**     | None                                                                    |
    +------------------------+-------------------------------------------------------------------------+
@@ -112,12 +112,14 @@ test vectors are listed in :srcref:`src/tests/data/pubkey/dlies.vec`.
    +------------------------+-------------------------------------------------------------------------+
    | **Expected Output:**   | Invalid ciphertexts should not decrypt correctly                        |
    +------------------------+-------------------------------------------------------------------------+
-   | **Steps:**             | #. Create a DH_PrivateKey object *P1* from *P, Q, G* and *X1*           |
+   | **Steps:**             | #. For each KAT vector, after successful decryption, generate multiple  |
+   |                        |    mutated versions of the *Ciphertext* by randomly flipping bits or    |
+   |                        |    altering the ciphertext length                                       |
    |                        |                                                                         |
-   |                        | #. Create a DH_PrivateKey object *P2* from *P*, *Q*, *G* and *X2*       |
+   |                        | #. Attempt to decrypt each mutated ciphertext with the same decryptor   |
    |                        |                                                                         |
-   |                        | #. Use P2, P1, the *KDF*, *MAC* and *IV* to decrypt the *Ciphertext*    |
-   |                        |    and compare with *Msg*                                               |
+   |                        | #. Verify that each mutated ciphertext either causes an exception or    |
+   |                        |    produces output that does not match the original *Msg*               |
    +------------------------+-------------------------------------------------------------------------+
 
 ECIES
@@ -163,6 +165,10 @@ time, the test cases where two or more of these modes are enabled do not
 encrypt/decrypt, but instead only check that the combination of these
 modes lead to an exception (negative test). In the following one
 positive and one negative test is shown.
+
+Note: The ISO 18033 ECIES tests are skipped on builds that do not
+support application-specific EC groups
+(``EC_Group::supports_application_specific_group()`` returns false).
 
 .. table::
    :class: longtable
@@ -236,8 +242,9 @@ positive and one negative test is shown.
    |                        | #. Encode the public point of *PR2* using *Format* and compare with     |
    |                        |    expected output *C0*                                                 |
    |                        |                                                                         |
-   |                        | #. Use PR1 and PU1 to derive a shared secret of 128 bytes using         |
-   |                        |    KDF1-18033(SHA-1) and *Format* and compare with expected output *K*  |
+   |                        | #. Use PR2 (Alice's ephemeral private key) and PU1 (Bob's public key)   |
+   |                        |    to derive a shared secret of 128 bytes using KDF1-18033(SHA-1) and   |
+   |                        |    *Format*, and compare with the expected output *K*                   |
    |                        |                                                                         |
    |                        | #. Create an ECIES_System_Params object ESP from *P*, *A*, *B*, *Kdf*,  |
    |                        |    *Cipher*, *CipherKeyLen*, *Mac*, *MacKeyLen*, *Format* and *Cofactor |
@@ -339,8 +346,9 @@ positive and one negative test is shown.
    |                        | #. Encode the public point of *PR2* using *Format* and compare with     |
    |                        |    expected output *C0*                                                 |
    |                        |                                                                         |
-   |                        | #. Use PR1 and PU1 to derive a shared secret of 128 bytes using         |
-   |                        |    KDF1-18033(SHA-1) and *Format* and compare with expected output *K*  |
+   |                        | #. Use PR2 (Alice's ephemeral private key) and PU1 (Bob's public key)   |
+   |                        |    to derive a shared secret of 128 bytes using KDF1-18033(SHA-1) and   |
+   |                        |    *Format*, and compare with the expected output *K*                   |
    |                        |                                                                         |
    |                        | #. Create an ECIES_System_Params ESP object from *P*, *A*, *B*, *Kdf*,  |
    |                        |    *Cipher*, *CipherKeyLen*, *Mac*, *MacKeyLen*, *Format* and *Cofactor |

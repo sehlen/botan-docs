@@ -88,6 +88,9 @@ The following table shows an example test case with one test vector. All test ve
    |                     |                                                                            |
    |                     | #. Revoke *Certs[3]* with reason *CA Compromise*                           |
    |                     |                                                                            |
+   |                     | #. Revoke *Certs[3]* with reason *CA Compromise* a second time             |
+   |                     |    (idempotency check)                                                     |
+   |                     |                                                                            |
    |                     | #. Generate CRLs                                                           |
    |                     |                                                                            |
    |                     | #. Check that *Certs[0]* and *Certs[3]* are revoked                        |
@@ -161,6 +164,9 @@ The following table shows an example test case with one test vector. All test ve
    +----------------------+----------------------------------------------------------------------------------+
    | **Steps:**           | #. Look up Certs by subject DN and subject key ID                                |
    |                      | #.  Check that only one match is found                                           |
+   |                      |                                                                                  |
+   |                      | #. Insert two certificates with identical subject DNs. Query by that DN with     |
+   |                      |    empty key ID. Check that exactly two certificates are returned.               |
    +----------------------+----------------------------------------------------------------------------------+
 
 Finding Certificate by hashed Subject DN
@@ -182,7 +188,7 @@ The following table shows an example test case with one test vector. All test ve
    +----------------------+--------------------------------------------------------------------------+
    | **Type:**            | Positive Test                                                            |
    +----------------------+--------------------------------------------------------------------------+
-   | **Description:**     | Searches certificate by hashed subject DNs of all certificates           |
+   | **Description:**     | Searches certificates by hashed subject DNs (Certificate_Store_In_Memory)|
    +----------------------+--------------------------------------------------------------------------+
    | **Preconditions:**   | None                                                                     |
    +----------------------+--------------------------------------------------------------------------+
@@ -195,6 +201,11 @@ The following table shows an example test case with one test vector. All test ve
    |                      |                                                                          |
    |                      | #. Check if certificate can be found in the store by using the built     |
    |                      |    hash.                                                                 |
+   |                      |                                                                          |
+   |                      | #. Find each certificate by its issuer DN and serial number              |
+   |                      |                                                                          |
+   |                      | #. Confirm that a lookup with a known-invalid 32-byte dummy hash returns |
+   |                      |    no result                                                             |
    +----------------------+--------------------------------------------------------------------------+
 
 System Certificate Store
@@ -282,7 +293,7 @@ This test uses two root certificates, (1) with its Subject Distinguished Name co
    +----------------------+--------------------------------------------------------------------------+
    | **Expected Output:** | None                                                                     |
    +----------------------+--------------------------------------------------------------------------+
-   | **Steps:**           | #. Query certificates by their public key’s SHA-1                        |
+   | **Steps:**           | #. Query certificates by their Subject Distinguished Name                |
    |                      |                                                                          |
    |                      | #. Check that:                                                           |
    |                      |                                                                          |
