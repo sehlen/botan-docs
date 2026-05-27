@@ -428,17 +428,17 @@ for(const auto& curve : curves) { ... }
 
 The source registers a complete `Object_Tests` class (`BOTAN_REGISTER_SERIALIZED_TEST("pkcs11", "pkcs11-object", Object_Tests)`) with five test functions not covered anywhere in the spec:
 
-| Suggested ID | Function | Description |
+| Suggested ID | Function | First Added |
 |---|---|---|
-| PKCS11-OBJECT-1 | `test_attribute_container` | Tests `AttributeContainer` operations: adding class, string, binary, bool, numeric attributes; overwriting an existing numeric attribute; verifying count and individual attribute types/values. Requires `BOTAN_HAS_ASN1` for some parts (numeric-only part has no conditional). |
-| PKCS11-OBJECT-2 | `test_create_destroy_data_object` | Creates a data object in the token with label, value, application, object ID properties; verifies creation; destroys it. Requires `BOTAN_HAS_ASN1`. |
-| PKCS11-OBJECT-3 | `test_get_set_attribute_values` | Creates a data object; reads its `Label` attribute; modifies the label; re-reads and verifies the updated value. Requires `BOTAN_HAS_ASN1`. |
-| PKCS11-OBJECT-4 | `test_object_finder` | Creates a data object; uses `ObjectFinder` and `Object::search<Object>()` to find it by label; verifies the found object matches by Application and Label attributes. Requires `BOTAN_HAS_ASN1`. |
-| PKCS11-OBJECT-5 | `test_object_copy` | Creates a data object; copies it with a new label via `data_obj.copy(copy_attributes)`; verifies the copy is findable by `ObjectFinder`; destroys both. Requires `BOTAN_HAS_ASN1`. |
+| PKCS11-OBJECT-1 | `test_attribute_container` | June 2016 (commit 2ea6f9b) |
+| PKCS11-OBJECT-2 | `test_create_destroy_data_object` | June 2016 (commit 2ea6f9b) |
+| PKCS11-OBJECT-3 | `test_get_set_attribute_values` | June 2016 (commit 2ea6f9b) |
+| PKCS11-OBJECT-4 | `test_object_finder` | June 2016 (commit 2ea6f9b) |
+| PKCS11-OBJECT-5 | `test_object_copy` | June 2016 (commit 2ea6f9b) |
 
 ### 2. PKCS11-SESSION-9 (Missing: `test_session_info`)
 
-The source's `Session_Tests` class includes `test_session_info`, which verifies:
+Added in June 2016 (commit 2ea6f9b). The source's `Session_Tests` class includes `test_session_info`, which verifies:
 - After opening an R/W session: `info.slotID == slot_vec.at(0)` and `info.state == SessionState::RwPublicSession`
 - After logging in as User: `info.state == SessionState::RwUserFunctions`
 - That login/logout and SO login succeed thereafter
@@ -447,7 +447,17 @@ This is registered and runs as part of `pkcs11-session` but has no corresponding
 
 ### 3. PKCS11-ECDSA-8 (Missing: `test_ecdsa_curve_import`)
 
-The source's `PKCS11_ECDSA_Tests` class includes an 8th test `test_ecdsa_curve_import`, which calls `test_ecdsa_sign_verify_core(EC_Group_Encoding::Explicit, ...)`. This differs from ECDSA-7 (`test_ecdsa_sign_verify`) by passing **explicit curve parameters** (DER-encoded full curve parameters) to the PKCS#11 library instead of a named curve OID. It exercises the same sign/verify flow over secp256r1 and brainpool512r1 but validates that the token can handle explicitly-encoded EC group parameters. This test is completely absent from the spec.
+Added in August 2019 (commit b5dd379). The source's `PKCS11_ECDSA_Tests` class includes an 8th test `test_ecdsa_curve_import`, which calls `test_ecdsa_sign_verify_core(EC_Group_Encoding::Explicit, ...)`. This differs from ECDSA-7 (`test_ecdsa_sign_verify`) by passing **explicit curve parameters** (DER-encoded full curve parameters) to the PKCS#11 library instead of a named curve OID. It exercises the same sign/verify flow over secp256r1 and brainpool512r1 but validates that the token can handle explicitly-encoded EC group parameters. This test is completely absent from the spec.
+
+### Timeline Context
+
+**Object Tests (PKCS11-OBJECT-1 through PKCS11-OBJECT-5)** — Added in June 2016 (commit 2ea6f9b) as part of the original PKCS#11 support implementation. This is a complete test group with 5 test functions covering AttributeContainer operations, data object creation/destruction, attribute get/set operations, object finding, and object copying. All tests require `BOTAN_HAS_ASN1`. This entire test group existed before the 3.7.1 baseline and was missed during previous documentation.
+
+**test_session_info (PKCS11-SESSION-9)** — Added in June 2016 (commit 2ea6f9b) as part of the original PKCS#11 Session_Tests class. This test verifies session state transitions (RwPublicSession → RwUserFunctions) and login/logout operations. It predates the 3.7.1 baseline and was missed.
+
+**test_ecdsa_curve_import (PKCS11-ECDSA-8)** — Added in August 2019 (commit b5dd379) to test PKCS#11 ECDSA with explicitly-encoded EC curve parameters rather than named curve OIDs. This test validates that PKCS#11 tokens can handle full DER-encoded curve parameters. It predates the 3.7.1 baseline and was missed during previous documentation.
+
+**Conclusion:** All these PKCS#11 tests were missed during previous documentation cycles. They existed before the 3.7.1 baseline and should have been documented earlier.
 
 ---
 

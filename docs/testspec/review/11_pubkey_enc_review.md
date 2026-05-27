@@ -141,29 +141,21 @@ accurately describes this.
 ## New Tests Found in Botan 3.12.0 Not in Spec
 
 
-| Test ID | Class | Registration | File |
-|---------|-------|--------------|------|
-| — | `ECIES_Tests` | `pubkey/ecies` | `test_ecies.cpp` |
-| — | `DLIES_Unit_Tests` | `pubkey/dlies_unit` | `test_dlies.cpp` |
-| — | `RSA_Blinding_Tests` | `pubkey/rsa_blinding` | `test_rsa.cpp` |
-| — | `RSA_DecryptOrRandom_Tests` | `pubkey/rsa_decrypt_or_random` | `test_rsa.cpp` |
+| Test ID | Class | Registration | File | First Added |
+|---------|-------|--------------|------|-------------|
+| — | `ECIES_Tests` | `pubkey/ecies` | `test_ecies.cpp` | Pre-3.7.1 (before 2024) |
+| — | `DLIES_Unit_Tests` | `pubkey/dlies_unit` | `test_dlies.cpp` | Pre-3.7.1 (before 2024) |
+| — | `RSA_Blinding_Tests` | `pubkey/rsa_blinding` | `test_rsa.cpp` | Dec 2016 (commit 2f9d7b7) |
+| — | `RSA_DecryptOrRandom_Tests` | `pubkey/rsa_decrypt_or_random` | `test_rsa.cpp` | Jan 2025 (commit ca4f797) |
 
-**`pubkey/ecies`** (`ECIES_Tests`) reads from `pubkey/ecies.vec` (distinct from
-the ISO 18033 file) and tests ECIES on named curves (secp192r1, secp256r1,
-secp384r1, secp521r1, secp112r2 with cofactor) with a full parameter grid. This
-is a significant test class not mentioned anywhere in the spec.
+### Timeline Context
 
-**`pubkey/dlies_unit`** (`DLIES_Unit_Tests`) exercises the XOR-stream cipher
-mode of DLIES (no block cipher needed) using several KDF/MAC combinations. It
-includes negative tests for "other public key not set" and "ciphertext too
-short".
+**ECIES_Tests** — Tests ECIES (not ISO 18033 variant) on named curves (secp192r1, secp256r1, secp384r1, secp521r1, secp112r2 with cofactor) with full parameter grid. This test existed before the 3.7.1 baseline and was missed during previous documentation.
 
-**`pubkey/rsa_blinding`** (`RSA_Blinding_Tests`) verifies that RSA signing and
-decryption blinding reinitialisation works correctly when the fixed-output RNG
-is exhausted.
+**DLIES_Unit_Tests** — Tests DLIES XOR-stream cipher mode (no block cipher) with various KDF/MAC combinations. Includes negative tests for "other public key not set" and "ciphertext too short". This test existed before the 3.7.1 baseline and was missed.
 
-**`pubkey/rsa_decrypt_or_random`** (`RSA_DecryptOrRandom_Tests`) tests the
-`PK_Decryptor_EME::decrypt_or_random` API: it verifies that the method always
-returns a plausible-length output for malformed ciphertexts (for PKCS#1 v1.5 and
-OAEP), and that content-checking works correctly for both valid and invalid
-content requirements.
+**RSA_Blinding_Tests** — Added in December 2016 (commit 2f9d7b7), well before the 3.7.1 baseline. This test verifies that RSA signing and decryption blinding reinitialisation works correctly when the fixed-output RNG is exhausted. It predates 3.7.1 and was missed during previous documentation.
+
+**RSA_DecryptOrRandom_Tests** — Added in January 2025 (commit ca4f797), after the 3.7.1 baseline. This is a NEW test that validates the `PK_Decryptor_EME::decrypt_or_random` API: it verifies that the method always returns a plausible-length output for malformed ciphertexts (for PKCS#1 v1.5 and OAEP), and that content-checking works correctly for both valid and invalid content requirements. This test was added after the baseline.
+
+**Conclusion:** ECIES_Tests, DLIES_Unit_Tests, and RSA_Blinding_Tests were missed during previous documentation cycles (existed before 3.7.1). RSA_DecryptOrRandom_Tests is a new test added after the 3.7.1 baseline.
