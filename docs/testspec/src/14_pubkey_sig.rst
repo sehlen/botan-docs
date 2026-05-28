@@ -1866,3 +1866,22 @@ table shows an example test case with one test vector.
    |                        |                                                                         |
    |                        | #. Check that the signature *InvalidSignature* does not verify          |
    +------------------------+-------------------------------------------------------------------------+
+
+Additional Botan 3.11 Coverage
+------------------------------
+
+The following signature tests existed in Botan 3.11.0 and were previously
+missing from this specification:
+
+- **PKSIG-ML-DSA-4** (`ml_dsa_verify`) — ML-DSA verify-only KAT coverage.
+- **PKSIG-ECDSA-5** (`ecdsa_all_groups`) — all-groups ECDSA sign/verify sweep.
+- **PKSIG-ECDSA-6** (`ecdsa_sign_verify_der`) — DER-formatted ECDSA signatures.
+- **PKSIG-ECDSA-7** (`ecdsa_key_recovery`) — ECDSA public key recovery vectors.
+- **PKSIG-RSA-4** (`rsa_pss`, `rsa_pss_raw`) — RSA-PSS and RSA-PSS-Raw vectors.
+- **PKSIG-RSA-5** (`rsa_blinding`) — RSA blinding regression coverage.
+- **PKSIG-KEY-RSA-2** (`rsa_keygen_badrng`) — negative RSA keygen RNG behavior.
+- **PKSIG-HSS/LMS-3** (`hss_lms_api`) — API-level HSS/LMS coverage.
+- **PKSIG-HSS/LMS-4** (`hss_lms_state`) — statefulness checks per signature.
+- **PKSIG-SLH-DSA-4** (`slh_dsa_keygen`) — SLH-DSA/SPHINCS+ key generation.
+- **PKSIG-XMSS-4** (`xmss_keygen`) — XMSS key generation coverage.
+- **PKSIG-XMSS-5** (`xmss_statefulness`) — XMSS one-time statefulness coverage.

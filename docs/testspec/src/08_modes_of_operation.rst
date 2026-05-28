@@ -320,3 +320,19 @@ test vectors are listed in :srcref:`src/tests/data/stream/ctr.vec`.
    |                      |    StreamCipher object and compare the result with the expected output   |
    |                      |    value *Out*                                                           |
    +----------------------+--------------------------------------------------------------------------+
+
+Additional Botan 3.11 Coverage
+------------------------------
+
+The following mode/stream-cipher tests existed in Botan 3.11.0 and were
+previously missing from this specification:
+
+- **MODE-CFB-1** (CFB mode vectors)
+- **MODE-XTS-1** (XTS mode vectors)
+- **MODE-CTR-CM-1** (CTR vectors from ``test_modes.cpp`` cipher-mode tests)
+- **MODE-IV-CARRY-1** (`Cipher_Mode_IV_Carry_Tests`)
+- **MODE-CHACHA20-1** (ChaCha20 stream cipher vectors)
+- **MODE-OFB-1** (OFB stream cipher vectors)
+- **MODE-RC4-1** (RC4 stream cipher vectors)
+- **MODE-SALSA20-1** (Salsa20 stream cipher vectors)
+- **MODE-SHAKE-1** (SHAKE stream/XOF vectors)

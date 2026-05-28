@@ -355,6 +355,25 @@ RSA
    |                        |    is available again                                                   |
    +------------------------+-------------------------------------------------------------------------+
 
+Additional Botan 3.11 Coverage
+------------------------------
+
+The following TPM tests existed in Botan 3.11.0 and were previously missing
+from this specification:
+
+- **TPM-HASH-1** (`tpm2_hash`)  
+  TPM-backed hash behavior including multi-update, long-message and error-path
+  checks.
+
+- **TPM-PROPS-1** (`tpm2_props`)  
+  TPM properties and supported-algorithm coverage.
+
+- **TPM-CONTEXT-1** (`tpm2_ctx`)  
+  TPM context behavior including persistent-handle and SRK related checks.
+
+- **TPM-EXT-CONTEXT-1** (`tpm2_external_ctx`)  
+  External ESYS context lifetime and interoperability checks.
+
 
 ECDSA
 -----

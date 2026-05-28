@@ -1059,6 +1059,19 @@ Parallel Hash Function Tests
    |                                  |    output value *Out*                                         |
    +----------------------------------+---------------------------------------------------------------+
 
+Additional Botan 3.11 Coverage
+------------------------------
+
+The following hash tests existed in Botan 3.11.0 and were previously missing
+from this specification:
+
+- **HASH-INVALID-NAME-1** (`invalid_name_hash`)  
+  Negative tests for invalid hash algorithm names and invalid hash
+  parameterization.
+
+- **HASH-TRUNC-NEG-1** (`hash_truncation`)  
+  Negative tests for invalid ``Truncated(...)`` hash parameter combinations.
+
 .. table::
    :class: longtable
    :widths: 20 80

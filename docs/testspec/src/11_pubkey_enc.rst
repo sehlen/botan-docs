@@ -492,3 +492,21 @@ test vectors are listed in :srcref:`src/tests/data/pubkey/rsaes.vec` and
    |                        | #. Decrypt the *Ciphertext* with the Private_Key object and compare     |
    |                        |    with the *Msg*                                                       |
    +------------------------+-------------------------------------------------------------------------+
+
+Additional Botan 3.11 Coverage
+------------------------------
+
+The following public-key encryption tests existed in Botan 3.11.0 and were
+previously missing from this specification:
+
+- **PKENC-ECIES-3** (`pubkey/ecies`)  
+  Additional non-ISO ECIES test registration coverage.
+
+- **PKENC-DLIES-3** (`pubkey/dlies_unit`)  
+  DLIES unit/regression coverage not represented in the prior spec text.
+
+- **PKENC-RSA-BLINDING-1** (`pubkey/rsa_blinding`)  
+  RSA blinding and blinder reinitialization regression coverage.
+
+- **PKENC-RSA-DEC-OR-RAND-1** (`pubkey/rsa_decrypt_or_random`)  
+  ``decrypt_or_random`` behavior for malformed ciphertext and content checks.

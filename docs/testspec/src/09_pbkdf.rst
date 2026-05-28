@@ -155,3 +155,14 @@ test vectors are listed in :srcref:`src/tests/data/argon2.vec`.
    |                        |    the Argon2 object and compare the result with the expected output    |
    |                        |    value *Out*                                                          |
    +------------------------+-------------------------------------------------------------------------+
+
+Additional Botan 3.11 Coverage
+------------------------------
+
+The following PBKDF tests existed in Botan 3.11.0 and were previously missing
+from this specification:
+
+- **PBKDF-BCRYPT-1** (Bcrypt-PBKDF vectors)
+- **PBKDF-SCRYPT-1** (Scrypt vectors)
+- **PBKDF-PWDHASH-1** (password-hash family parameter tuning coverage)
+- **PBKDF-PGP-S2K-1** (OpenPGP S2K iteration and vector coverage)

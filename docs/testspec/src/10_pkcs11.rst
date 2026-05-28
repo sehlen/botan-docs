@@ -2088,3 +2088,30 @@ and SO PIN.
    |                     |                                                                            |
    |                     | #. Set the SO PIN to 12345678 using the SO PIN 87654321                    |
    +---------------------+----------------------------------------------------------------------------+
+
+Additional Botan 3.11 Coverage
+------------------------------
+
+The following PKCS#11 tests existed in Botan 3.11.0 and were previously
+missing from this specification:
+
+- **PKCS11-SESSION-9** (`test_session_info`)  
+  Verifies PKCS#11 session state transitions across login/logout.
+
+- **PKCS11-OBJECT-1** (`test_attribute_container`)  
+  Covers PKCS#11 attribute container handling.
+
+- **PKCS11-OBJECT-2** (`test_create_destroy_data_object`)  
+  Covers data object creation and destruction.
+
+- **PKCS11-OBJECT-3** (`test_get_set_attribute_values`)  
+  Covers attribute read/write APIs on token objects.
+
+- **PKCS11-OBJECT-4** (`test_object_finder`)  
+  Covers object lookup by attribute templates.
+
+- **PKCS11-OBJECT-5** (`test_object_copy`)  
+  Covers PKCS#11 object copy behavior.
+
+- **PKCS11-ECDSA-8** (`test_ecdsa_curve_import`)  
+  Covers ECDSA sign/verify with explicit EC curve parameters.

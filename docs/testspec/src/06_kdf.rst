@@ -453,3 +453,15 @@ All test vectors are listed in :srcref:`src/tests/data/kdf/hkdf.vec`.
    |                        | #. Input *Salt,* *Label* and *Secret* into the HKDF and compare         |
    |                        |    the result with the expected output value *Out*                      |
    +------------------------+-------------------------------------------------------------------------+
+
+Additional Botan 3.11 Coverage
+------------------------------
+
+The following KDF tests existed in Botan 3.11.0 and were previously missing
+from this specification:
+
+- **KDF-KDF1-X963-1** (KDF1 / X9.63 vectors)
+- **KDF-KDF2-1** (KDF2 vectors)
+- **KDF-SP800-56A-1** (SP800-56A vectors)
+- **KDF-X942-1** (X9.42 PRF vectors)
+- **KDF-HKDF-LABEL-1** (`hkdf_label`) for HKDF-Expand-Label coverage

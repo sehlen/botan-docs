@@ -329,3 +329,18 @@ The system RNG is tested for basic consistency and functionality.
    |                       |    #. Confirm that the prepared 1024bytes at the end of the buffer were  |
    |                       |       overwritten as expected                                            |
    +-----------------------+--------------------------------------------------------------------------+
+
+Additional Botan 3.11 Coverage
+------------------------------
+
+The following RNG tests existed in Botan 3.11.0 and were previously missing
+from this specification:
+
+- **RNG-CHACHA-UNIT-1** (`chacha_rng_unit`)  
+  ChaCha RNG unit behavior (seeding, clear/reset, request sizing).
+
+- **RNG-PROCESSOR-1** (`processor_rng`)  
+  Hardware/processor RNG behavior and invariants.
+
+- **RNG-HMAC-DRBG-MULTI-1** (`hmac_drbg_multi_request`)  
+  Regression test for equivalent output across split vs bulk DRBG requests.

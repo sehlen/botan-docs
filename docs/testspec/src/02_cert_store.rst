@@ -385,3 +385,19 @@ Query non-existent Certificates
    |                      |                                                                          |
    |                      |     (b) no unexpected error occurs                                       |
    +----------------------+--------------------------------------------------------------------------+
+
+Additional Botan 3.11 Coverage
+------------------------------
+
+The following cert store tests existed in Botan 3.11.0 and were previously
+missing from this specification:
+
+- **CERTSTOR-LOAD-1** (`test_certstor_load_allcert`)  
+  Verifies loading a PEM bundle with multiple certificates into
+  ``Certificate_Store_In_Memory`` and checks that all bundled certificates are
+  available.
+
+- **CERTSTOR-X509-LOOKUP-1** (additional X.509 lookup coverage in cert store
+  tests)  
+  Verifies lookup behavior for certificate queries that are exercised in
+  ``test_certstor.cpp`` but were not called out explicitly in this document.

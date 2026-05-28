@@ -407,3 +407,14 @@ The tests are taken from NIST's `KMAC_samples.pdf <https://csrc.nist.gov/CSRC/me
    |                      |    functions on the KMAC with these arrays. Calculate the tag and        |
    |                      |    compare it with the expected output value *Out*                       |
    +----------------------+--------------------------------------------------------------------------+
+
+Additional Botan 3.11 Coverage
+------------------------------
+
+The following MAC tests existed in Botan 3.11.0 and were previously missing
+from this specification:
+
+- **MAC-BLAKE2B-1** (BLAKE2b-MAC KAT coverage)
+- **MAC-POLY1305-1** (Poly1305 KAT coverage)
+- **MAC-SIPHASH-1** (SipHash KAT coverage)
+- **MAC-X9.19-1** (X9.19 MAC KAT coverage)

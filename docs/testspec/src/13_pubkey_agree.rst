@@ -658,3 +658,13 @@ constraints for all the key-related test cases are:
    |                        | #. Check that the public key is valid by checking that the public point |
    |                        |    is on the *Curve*                                                    |
    +------------------------+-------------------------------------------------------------------------+
+
+Additional Botan 3.11 Coverage
+------------------------------
+
+The following key-agreement test existed in Botan 3.11.0 and was previously
+missing from this specification:
+
+- **KA-ECDH-ALL-GROUPS-1** (`pubkey/ecdh_all_groups`)  
+  Regression sweep across all supported named EC groups, including invalid-key
+  rejection cases and randomized roundtrip agreement checks.
