@@ -1,6 +1,10 @@
 Trusted Platform Module Wrapper
 ===============================
 
+The Botan TPM 2.0 wrapper provides high-level access to TPM functionality
+for session management, cryptographic hashing, and property retrieval.
+All the tests are implemented in :srcref:`src/tests/test_tpm.cpp`.
+
 Session Management
 ------------------
 
@@ -198,7 +202,6 @@ Session Management
    |                      |                                                                                |
    |                      | #. Verify the observed behavior matches the expected output.                   |
    +----------------------+--------------------------------------------------------------------------------+
-
 
 Random Number Generator
 -----------------------
