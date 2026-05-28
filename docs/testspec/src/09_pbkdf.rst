@@ -156,9 +156,6 @@ test vectors are listed in :srcref:`src/tests/data/argon2.vec`.
    |                        |    value *Out*                                                          |
    +------------------------+-------------------------------------------------------------------------+
 
-Additional Botan 3.11 Coverage
-------------------------------
-
 .. table::
    :class: longtable
    :widths: 20 80
@@ -250,4 +247,3 @@ Additional Botan 3.11 Coverage
    |                      |                                                                                |
    |                      | #. Verify the observed behavior matches the expected output.                   |
    +----------------------+--------------------------------------------------------------------------------+
-

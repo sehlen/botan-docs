@@ -573,6 +573,32 @@ known answer test as follows. The test is implemented in
    |                        |    expected output value *K*                                            |
    +------------------------+-------------------------------------------------------------------------+
 
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | KA-ECDH-ALL-GROUPS-1                                                           |
+   +======================+================================================================================+
+   | **Type:**            | Positive/negative regression test                                              |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Runs ECDH agreement checks across all supported named EC groups, including     |
+   |                      | invalid-key rejection cases                                                    |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`pubkey/ecdh_all_groups`)                                                     |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Valid key pairs derive matching shared secrets and invalid inputs are rejected |
+   |                      | by the API                                                                     |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for KA-ECDH-ALL-GROUPS-1                   |
+   |                      | (`pubkey/ecdh_all_groups`)                                                     |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+
+
 .. _section-3:
 
 Elliptic Curve Diffie-Hellman key agreement is tested with the following
@@ -658,32 +684,3 @@ constraints for all the key-related test cases are:
    |                        | #. Check that the public key is valid by checking that the public point |
    |                        |    is on the *Curve*                                                    |
    +------------------------+-------------------------------------------------------------------------+
-
-Additional Botan 3.11 Coverage
-------------------------------
-
-.. table::
-   :class: longtable
-   :widths: 20 80
-
-   +----------------------+--------------------------------------------------------------------------------+
-   | **Test Case No.:**   | KA-ECDH-ALL-GROUPS-1                                                           |
-   +======================+================================================================================+
-   | **Type:**            | Positive/negative regression test                                              |
-   +----------------------+--------------------------------------------------------------------------------+
-   | **Description:**     | Runs ECDH agreement checks across all supported named EC groups, including     |
-   |                      | invalid-key rejection cases                                                    |
-   +----------------------+--------------------------------------------------------------------------------+
-   | **Preconditions:**   | None                                                                           |
-   +----------------------+--------------------------------------------------------------------------------+
-   | **Input Values:**    | (`pubkey/ecdh_all_groups`)                                                     |
-   +----------------------+--------------------------------------------------------------------------------+
-   | **Expected Output:** | Valid key pairs derive matching shared secrets and invalid inputs are rejected |
-   |                      | by the API                                                                     |
-   +----------------------+--------------------------------------------------------------------------------+
-   | **Steps:**           | #. Execute the Botan 3.11 test case for KA-ECDH-ALL-GROUPS-1                   |
-   |                      | (`pubkey/ecdh_all_groups`)                                                     |
-   |                      |                                                                                |
-   |                      | #. Verify the observed behavior matches the expected output.                   |
-   +----------------------+--------------------------------------------------------------------------------+
-

@@ -55,6 +55,32 @@ The following table shows an example test case with one test vector. All test ve
    +---------------------+----------------------------------------------------------------------------+
 
 
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | CERTSTOR-LOAD-1                                                                |
+   +======================+================================================================================+
+   | **Type:**            | Positive test                                                                  |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Loads a PEM bundle with multiple certificates into                             |
+   |                      | ``Certificate_Store_In_Memory``                                                |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`test_certstor_load_allcert`)                                                 |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | All certificates from the bundle are available in the in-memory store and can  |
+   |                      | be retrieved by the tested lookup paths                                        |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for CERTSTOR-LOAD-1                        |
+   |                      | (`test_certstor_load_allcert`)                                                 |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+
+
 Revocation
 ~~~~~~~~~~
 
@@ -162,6 +188,32 @@ The following table shows an example test case with one test vector. All test ve
    | **Steps:**           | #. Look up Certs by subject DN and subject key ID                                |
    |                      | #.  Check that only one match is found                                           |
    +----------------------+----------------------------------------------------------------------------------+
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | CERTSTOR-X509-LOOKUP-1                                                         |
+   +======================+================================================================================+
+   | **Type:**            | Positive/negative lookup coverage                                              |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Exercises additional certificate lookup paths covered in ``test_certstor.cpp`` |
+   |                      | that were not explicitly specified before                                      |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (additional X.509 lookup coverage in cert store)                               |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Lookup queries return matching certificates when present and no result for non-|
+   |                      | matching queries without unexpected errors                                     |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for CERTSTOR-X509-LOOKUP-1 (additional     |
+   |                      | X.509 lookup coverage in cert store)                                           |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+
 
 Finding Certificate by hashed Subject DN
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -385,57 +437,3 @@ Query non-existent Certificates
    |                      |                                                                          |
    |                      |     (b) no unexpected error occurs                                       |
    +----------------------+--------------------------------------------------------------------------+
-
-Additional Botan 3.11 Coverage
-------------------------------
-
-.. table::
-   :class: longtable
-   :widths: 20 80
-
-   +----------------------+--------------------------------------------------------------------------------+
-   | **Test Case No.:**   | CERTSTOR-LOAD-1                                                                |
-   +======================+================================================================================+
-   | **Type:**            | Positive test                                                                  |
-   +----------------------+--------------------------------------------------------------------------------+
-   | **Description:**     | Loads a PEM bundle with multiple certificates into                             |
-   |                      | ``Certificate_Store_In_Memory``                                                |
-   +----------------------+--------------------------------------------------------------------------------+
-   | **Preconditions:**   | None                                                                           |
-   +----------------------+--------------------------------------------------------------------------------+
-   | **Input Values:**    | (`test_certstor_load_allcert`)                                                 |
-   +----------------------+--------------------------------------------------------------------------------+
-   | **Expected Output:** | All certificates from the bundle are available in the in-memory store and can  |
-   |                      | be retrieved by the tested lookup paths                                        |
-   +----------------------+--------------------------------------------------------------------------------+
-   | **Steps:**           | #. Execute the Botan 3.11 test case for CERTSTOR-LOAD-1                        |
-   |                      | (`test_certstor_load_allcert`)                                                 |
-   |                      |                                                                                |
-   |                      | #. Verify the observed behavior matches the expected output.                   |
-   +----------------------+--------------------------------------------------------------------------------+
-
-.. table::
-   :class: longtable
-   :widths: 20 80
-
-   +----------------------+--------------------------------------------------------------------------------+
-   | **Test Case No.:**   | CERTSTOR-X509-LOOKUP-1                                                         |
-   +======================+================================================================================+
-   | **Type:**            | Positive/negative lookup coverage                                              |
-   +----------------------+--------------------------------------------------------------------------------+
-   | **Description:**     | Exercises additional certificate lookup paths covered in ``test_certstor.cpp`` |
-   |                      | that were not explicitly specified before                                      |
-   +----------------------+--------------------------------------------------------------------------------+
-   | **Preconditions:**   | None                                                                           |
-   +----------------------+--------------------------------------------------------------------------------+
-   | **Input Values:**    | (additional X.509 lookup coverage in cert store)                               |
-   +----------------------+--------------------------------------------------------------------------------+
-   | **Expected Output:** | Lookup queries return matching certificates when present and no result for non-|
-   |                      | matching queries without unexpected errors                                     |
-   +----------------------+--------------------------------------------------------------------------------+
-   | **Steps:**           | #. Execute the Botan 3.11 test case for CERTSTOR-X509-LOOKUP-1 (additional     |
-   |                      | X.509 lookup coverage in cert store)                                           |
-   |                      |                                                                                |
-   |                      | #. Verify the observed behavior matches the expected output.                   |
-   +----------------------+--------------------------------------------------------------------------------+
-

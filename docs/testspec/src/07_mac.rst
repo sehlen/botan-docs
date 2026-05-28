@@ -408,9 +408,6 @@ The tests are taken from NIST's `KMAC_samples.pdf <https://csrc.nist.gov/CSRC/me
    |                      |    compare it with the expected output value *Out*                       |
    +----------------------+--------------------------------------------------------------------------+
 
-Additional Botan 3.11 Coverage
-------------------------------
-
 .. table::
    :class: longtable
    :widths: 20 80
@@ -499,4 +496,3 @@ Additional Botan 3.11 Coverage
    |                      |                                                                                |
    |                      | #. Verify the observed behavior matches the expected output.                   |
    +----------------------+--------------------------------------------------------------------------------+
-
