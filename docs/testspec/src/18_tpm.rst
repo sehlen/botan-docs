@@ -362,17 +362,32 @@ The following TPM tests existed in Botan 3.11.0 and were previously missing
 from this specification:
 
 - **TPM-HASH-1** (`tpm2_hash`)  
-  TPM-backed hash behavior including multi-update, long-message and error-path
-  checks.
+  **Type:** Positive/negative regression test.  
+  **Description:** Covers TPM-backed hashing with multi-update, long-message
+  processing and error-path checks.  
+  **Expected Output:** Hash operations match expected behavior and invalid
+  operations report expected failures.
 
 - **TPM-PROPS-1** (`tpm2_props`)  
-  TPM properties and supported-algorithm coverage.
+  **Type:** Positive API test.  
+  **Description:** Verifies TPM property queries and supported-algorithm
+  reporting.  
+  **Expected Output:** Queried TPM properties and capability values are
+  returned consistently.
 
 - **TPM-CONTEXT-1** (`tpm2_ctx`)  
-  TPM context behavior including persistent-handle and SRK related checks.
+  **Type:** Positive regression test.  
+  **Description:** Covers TPM context operations including persistent-handle
+  and SRK-related scenarios.  
+  **Expected Output:** Context setup/teardown and handle usage follow expected
+  semantics.
 
 - **TPM-EXT-CONTEXT-1** (`tpm2_external_ctx`)  
-  External ESYS context lifetime and interoperability checks.
+  **Type:** Positive regression test.  
+  **Description:** Tests external ESYS context lifetime and interoperability
+  behavior.  
+  **Expected Output:** External context operations succeed and interoperate with
+  tested TPM API flows.
 
 
 ECDSA

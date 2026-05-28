@@ -163,6 +163,26 @@ The following PBKDF tests existed in Botan 3.11.0 and were previously missing
 from this specification:
 
 - **PBKDF-BCRYPT-1** (Bcrypt-PBKDF vectors)
-- **PBKDF-SCRYPT-1** (Scrypt vectors)
-- **PBKDF-PWDHASH-1** (password-hash family parameter tuning coverage)
-- **PBKDF-PGP-S2K-1** (OpenPGP S2K iteration and vector coverage)
+  **Type:** Positive vector test.  
+  **Description:** Runs bcrypt-pbkdf vectors across defined cost/iteration
+  settings.  
+  **Expected Output:** Derived keys match expected vector values.
+
+- **PBKDF-SCRYPT-1** (Scrypt vectors)  
+  **Type:** Positive vector test.  
+  **Description:** Runs scrypt vectors over known parameter sets.  
+  **Expected Output:** Derived keys match expected test vectors.
+
+- **PBKDF-PWDHASH-1** (password-hash family parameter tuning coverage)  
+  **Type:** Positive API/regression test.  
+  **Description:** Verifies password-hash helper behavior for parameter
+  calibration and accepted ranges.  
+  **Expected Output:** Parameter selection and derivation operations succeed
+  and return consistent results.
+
+- **PBKDF-PGP-S2K-1** (OpenPGP S2K iteration and vector coverage)  
+  **Type:** Positive vector/regression test.  
+  **Description:** Covers OpenPGP S2K iteration handling and registered
+  vectors.  
+  **Expected Output:** S2K-derived outputs match expected values for each
+  vector.

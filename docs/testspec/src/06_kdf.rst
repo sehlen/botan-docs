@@ -461,7 +461,28 @@ The following KDF tests existed in Botan 3.11.0 and were previously missing
 from this specification:
 
 - **KDF-KDF1-X963-1** (KDF1 / X9.63 vectors)
-- **KDF-KDF2-1** (KDF2 vectors)
-- **KDF-SP800-56A-1** (SP800-56A vectors)
-- **KDF-X942-1** (X9.42 PRF vectors)
-- **KDF-HKDF-LABEL-1** (`hkdf_label`) for HKDF-Expand-Label coverage
+  **Type:** Positive vector test.  
+  **Description:** Runs KDF1/X9.63 known-answer vectors.  
+  **Expected Output:** Derived key bytes match the referenced vectors.
+
+- **KDF-KDF2-1** (KDF2 vectors)  
+  **Type:** Positive vector test.  
+  **Description:** Runs KDF2 known-answer vectors.  
+  **Expected Output:** Derived key bytes match expected output for each vector.
+
+- **KDF-SP800-56A-1** (SP800-56A vectors)  
+  **Type:** Positive vector test.  
+  **Description:** Covers SP800-56A KDF test vectors.  
+  **Expected Output:** KDF output is identical to the specified vector output.
+
+- **KDF-X942-1** (X9.42 PRF vectors)  
+  **Type:** Positive vector test.  
+  **Description:** Covers ANSI X9.42 PRF/KDF vector processing.  
+  **Expected Output:** PRF/KDF output matches expected test vector bytes.
+
+- **KDF-HKDF-LABEL-1** (`hkdf_label`)  
+  **Type:** Positive API/vector test.  
+  **Description:** Covers ``HKDF-Expand-Label`` behavior and label/context
+  handling.  
+  **Expected Output:** Expanded output matches Botan's expected HKDF-label
+  results.

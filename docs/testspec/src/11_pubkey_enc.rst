@@ -500,13 +500,29 @@ The following public-key encryption tests existed in Botan 3.11.0 and were
 previously missing from this specification:
 
 - **PKENC-ECIES-3** (`pubkey/ecies`)  
-  Additional non-ISO ECIES test registration coverage.
+  **Type:** Positive regression test.  
+  **Description:** Covers additional non-ISO ECIES test registrations and
+  execution paths.  
+  **Expected Output:** Encryption/decryption checks complete successfully and
+  match expected behavior for the registered vectors.
 
 - **PKENC-DLIES-3** (`pubkey/dlies_unit`)  
-  DLIES unit/regression coverage not represented in the prior spec text.
+  **Type:** Positive unit/regression test.  
+  **Description:** Covers DLIES unit tests not previously represented in this
+  specification.  
+  **Expected Output:** DLIES operations satisfy roundtrip and expected-result
+  assertions.
 
 - **PKENC-RSA-BLINDING-1** (`pubkey/rsa_blinding`)  
-  RSA blinding and blinder reinitialization regression coverage.
+  **Type:** Positive regression test.  
+  **Description:** Tests RSA blinding behavior, including blinder
+  reinitialization handling.  
+  **Expected Output:** Operations succeed while preserving correctness across
+  blinding state changes.
 
 - **PKENC-RSA-DEC-OR-RAND-1** (`pubkey/rsa_decrypt_or_random`)  
-  ``decrypt_or_random`` behavior for malformed ciphertext and content checks.
+  **Type:** Negative/robustness test.  
+  **Description:** Exercises ``decrypt_or_random`` with malformed ciphertext
+  and content checks.  
+  **Expected Output:** Malformed inputs do not leak oracle behavior and the API
+  follows expected decrypt-or-random semantics.

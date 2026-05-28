@@ -1066,11 +1066,18 @@ The following hash tests existed in Botan 3.11.0 and were previously missing
 from this specification:
 
 - **HASH-INVALID-NAME-1** (`invalid_name_hash`)  
-  Negative tests for invalid hash algorithm names and invalid hash
-  parameterization.
+  **Type:** Negative test.  
+  **Description:** Validates hash construction with invalid algorithm names and
+  invalid parameterized hash specifications.  
+  **Expected Output:** Invalid names/parameterizations are rejected and error
+  handling matches Botan's expected behavior.
 
 - **HASH-TRUNC-NEG-1** (`hash_truncation`)  
-  Negative tests for invalid ``Truncated(...)`` hash parameter combinations.
+  **Type:** Negative test.  
+  **Description:** Tests invalid ``Truncated(...)`` hash parameter
+  combinations.  
+  **Expected Output:** Unsupported or malformed truncation specifications are
+  rejected consistently.
 
 .. table::
    :class: longtable

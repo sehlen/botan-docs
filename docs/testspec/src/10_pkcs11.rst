@@ -2096,22 +2096,46 @@ The following PKCS#11 tests existed in Botan 3.11.0 and were previously
 missing from this specification:
 
 - **PKCS11-SESSION-9** (`test_session_info`)  
-  Verifies PKCS#11 session state transitions across login/logout.
+  **Type:** Positive API test.  
+  **Description:** Verifies PKCS#11 session state transitions and metadata
+  reporting across login/logout operations.  
+  **Expected Output:** Session info reflects the expected state before and
+  after authentication transitions.
 
 - **PKCS11-OBJECT-1** (`test_attribute_container`)  
-  Covers PKCS#11 attribute container handling.
+  **Type:** Positive API test.  
+  **Description:** Covers PKCS#11 attribute container creation, update and
+  retrieval behavior.  
+  **Expected Output:** Attribute sets are stored and read back as expected.
 
 - **PKCS11-OBJECT-2** (`test_create_destroy_data_object`)  
-  Covers data object creation and destruction.
+  **Type:** Positive API test.  
+  **Description:** Covers creation and destruction of PKCS#11 data objects.  
+  **Expected Output:** Object lifecycle operations succeed and destroyed
+  objects are no longer discoverable.
 
 - **PKCS11-OBJECT-3** (`test_get_set_attribute_values`)  
-  Covers attribute read/write APIs on token objects.
+  **Type:** Positive API test.  
+  **Description:** Exercises ``get``/``set`` attribute-value operations for
+  token objects.  
+  **Expected Output:** Written attributes are read back consistently and API
+  calls behave as specified.
 
 - **PKCS11-OBJECT-4** (`test_object_finder`)  
-  Covers object lookup by attribute templates.
+  **Type:** Positive API test.  
+  **Description:** Covers object discovery via attribute-template searches.  
+  **Expected Output:** Finder queries return matching objects and exclude
+  non-matching objects.
 
 - **PKCS11-OBJECT-5** (`test_object_copy`)  
-  Covers PKCS#11 object copy behavior.
+  **Type:** Positive API test.  
+  **Description:** Covers object-copy behavior and copied object attributes.  
+  **Expected Output:** Copies are created successfully with expected attribute
+  semantics.
 
 - **PKCS11-ECDSA-8** (`test_ecdsa_curve_import`)  
-  Covers ECDSA sign/verify with explicit EC curve parameters.
+  **Type:** Positive API/regression test.  
+  **Description:** Covers import of explicit EC parameters and subsequent
+  ECDSA sign/verify operations.  
+  **Expected Output:** Imported keys are usable and signature verification
+  succeeds for valid signatures.

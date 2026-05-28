@@ -393,11 +393,16 @@ The following cert store tests existed in Botan 3.11.0 and were previously
 missing from this specification:
 
 - **CERTSTOR-LOAD-1** (`test_certstor_load_allcert`)  
-  Verifies loading a PEM bundle with multiple certificates into
-  ``Certificate_Store_In_Memory`` and checks that all bundled certificates are
-  available.
+  **Type:** Positive test.  
+  **Description:** Loads a PEM bundle with multiple certificates into
+  ``Certificate_Store_In_Memory``.  
+  **Expected Output:** All certificates from the bundle are available in the
+  in-memory store and can be retrieved by the tested lookup paths.
 
 - **CERTSTOR-X509-LOOKUP-1** (additional X.509 lookup coverage in cert store
   tests)  
-  Verifies lookup behavior for certificate queries that are exercised in
-  ``test_certstor.cpp`` but were not called out explicitly in this document.
+  **Type:** Positive/negative lookup coverage.  
+  **Description:** Exercises additional certificate lookup paths covered in
+  ``test_certstor.cpp`` that were not explicitly specified before.  
+  **Expected Output:** Lookup queries return matching certificates when present
+  and no result for non-matching queries without unexpected errors.

@@ -1873,15 +1873,77 @@ Additional Botan 3.11 Coverage
 The following signature tests existed in Botan 3.11.0 and were previously
 missing from this specification:
 
-- **PKSIG-ML-DSA-4** (`ml_dsa_verify`) — ML-DSA verify-only KAT coverage.
-- **PKSIG-ECDSA-5** (`ecdsa_all_groups`) — all-groups ECDSA sign/verify sweep.
-- **PKSIG-ECDSA-6** (`ecdsa_sign_verify_der`) — DER-formatted ECDSA signatures.
-- **PKSIG-ECDSA-7** (`ecdsa_key_recovery`) — ECDSA public key recovery vectors.
-- **PKSIG-RSA-4** (`rsa_pss`, `rsa_pss_raw`) — RSA-PSS and RSA-PSS-Raw vectors.
-- **PKSIG-RSA-5** (`rsa_blinding`) — RSA blinding regression coverage.
-- **PKSIG-KEY-RSA-2** (`rsa_keygen_badrng`) — negative RSA keygen RNG behavior.
-- **PKSIG-HSS/LMS-3** (`hss_lms_api`) — API-level HSS/LMS coverage.
-- **PKSIG-HSS/LMS-4** (`hss_lms_state`) — statefulness checks per signature.
-- **PKSIG-SLH-DSA-4** (`slh_dsa_keygen`) — SLH-DSA/SPHINCS+ key generation.
-- **PKSIG-XMSS-4** (`xmss_keygen`) — XMSS key generation coverage.
-- **PKSIG-XMSS-5** (`xmss_statefulness`) — XMSS one-time statefulness coverage.
+- **PKSIG-ML-DSA-4** (`ml_dsa_verify`)  
+  **Type:** Positive vector test.  
+  **Description:** Verifies ML-DSA signatures against registered verification
+  vectors.  
+  **Expected Output:** Valid signatures verify successfully and invalid cases
+  are rejected.
+
+- **PKSIG-ECDSA-5** (`ecdsa_all_groups`)  
+  **Type:** Positive regression test.  
+  **Description:** Sweeps ECDSA sign/verify over all supported EC groups.  
+  **Expected Output:** Signatures produced on each supported group verify
+  correctly.
+
+- **PKSIG-ECDSA-6** (`ecdsa_sign_verify_der`)  
+  **Type:** Positive format/regression test.  
+  **Description:** Covers DER-encoded ECDSA signature generation and
+  verification paths.  
+  **Expected Output:** DER signatures are accepted when valid and rejected when
+  malformed.
+
+- **PKSIG-ECDSA-7** (`ecdsa_key_recovery`)  
+  **Type:** Positive vector/regression test.  
+  **Description:** Tests ECDSA public-key recovery vectors.  
+  **Expected Output:** Recovered public keys match expected keys for valid
+  inputs.
+
+- **PKSIG-RSA-4** (`rsa_pss`, `rsa_pss_raw`)  
+  **Type:** Positive vector test.  
+  **Description:** Covers RSA-PSS and RSA-PSS-Raw sign/verify vectors.  
+  **Expected Output:** Signature verification results match expected vector
+  outcomes.
+
+- **PKSIG-RSA-5** (`rsa_blinding`)  
+  **Type:** Positive regression test.  
+  **Description:** Exercises RSA blinding during private-key signing
+  operations.  
+  **Expected Output:** Signing remains correct while blinding behavior is
+  applied.
+
+- **PKSIG-KEY-RSA-2** (`rsa_keygen_badrng`)  
+  **Type:** Negative test.  
+  **Description:** Tests RSA key generation with bad/failing RNG behavior.  
+  **Expected Output:** Keygen fails safely with expected error behavior.
+
+- **PKSIG-HSS/LMS-3** (`hss_lms_api`)  
+  **Type:** Positive API test.  
+  **Description:** Covers HSS/LMS API-level sign/verify operations.  
+  **Expected Output:** API operations succeed for valid inputs and verify
+  correctly.
+
+- **PKSIG-HSS/LMS-4** (`hss_lms_state`)  
+  **Type:** Positive stateful regression test.  
+  **Description:** Validates state progression and one-time-signature usage for
+  HSS/LMS.  
+  **Expected Output:** State updates occur as expected and invalid state reuse
+  is detected.
+
+- **PKSIG-SLH-DSA-4** (`slh_dsa_keygen`)  
+  **Type:** Positive keygen test.  
+  **Description:** Covers SLH-DSA/SPHINCS+ key generation behavior.  
+  **Expected Output:** Generated keys are valid and usable for subsequent
+  signing operations.
+
+- **PKSIG-XMSS-4** (`xmss_keygen`)  
+  **Type:** Positive keygen test.  
+  **Description:** Covers XMSS key generation paths.  
+  **Expected Output:** Generated XMSS keys are valid and accepted by signing
+  APIs.
+
+- **PKSIG-XMSS-5** (`xmss_statefulness`)  
+  **Type:** Positive stateful regression test.  
+  **Description:** Verifies XMSS one-time/stateful signature behavior.  
+  **Expected Output:** Signature state advances correctly and disallowed reuse
+  is rejected.

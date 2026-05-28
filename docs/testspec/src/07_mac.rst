@@ -415,6 +415,21 @@ The following MAC tests existed in Botan 3.11.0 and were previously missing
 from this specification:
 
 - **MAC-BLAKE2B-1** (BLAKE2b-MAC KAT coverage)
-- **MAC-POLY1305-1** (Poly1305 KAT coverage)
-- **MAC-SIPHASH-1** (SipHash KAT coverage)
-- **MAC-X9.19-1** (X9.19 MAC KAT coverage)
+  **Type:** Positive known-answer test.  
+  **Description:** Runs BLAKE2b-MAC vectors with fixed key/message pairs.  
+  **Expected Output:** MAC tags match the expected KAT outputs.
+
+- **MAC-POLY1305-1** (Poly1305 KAT coverage)  
+  **Type:** Positive known-answer test.  
+  **Description:** Runs Poly1305 vectors for keyed message authentication.  
+  **Expected Output:** Computed tags match the expected vector tags.
+
+- **MAC-SIPHASH-1** (SipHash KAT coverage)  
+  **Type:** Positive known-answer test.  
+  **Description:** Runs SipHash vectors over canonical message sequences.  
+  **Expected Output:** SipHash outputs match the referenced expected values.
+
+- **MAC-X9.19-1** (X9.19 MAC KAT coverage)  
+  **Type:** Positive known-answer test.  
+  **Description:** Runs ANSI X9.19 MAC vectors.  
+  **Expected Output:** Generated MAC values match expected vector outputs.

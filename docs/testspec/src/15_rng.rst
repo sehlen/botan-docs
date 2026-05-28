@@ -337,10 +337,21 @@ The following RNG tests existed in Botan 3.11.0 and were previously missing
 from this specification:
 
 - **RNG-CHACHA-UNIT-1** (`chacha_rng_unit`)  
-  ChaCha RNG unit behavior (seeding, clear/reset, request sizing).
+  **Type:** Positive unit/regression test.  
+  **Description:** Covers ChaCha RNG seeding, clear/reset behavior and request
+  sizing edge cases.  
+  **Expected Output:** RNG API behavior remains consistent and output requests
+  complete with expected constraints.
 
 - **RNG-PROCESSOR-1** (`processor_rng`)  
-  Hardware/processor RNG behavior and invariants.
+  **Type:** Positive platform/regression test.  
+  **Description:** Exercises processor/hardware RNG behavior and invariants.  
+  **Expected Output:** RNG availability and output checks satisfy the tested
+  invariants without unexpected failures.
 
 - **RNG-HMAC-DRBG-MULTI-1** (`hmac_drbg_multi_request`)  
-  Regression test for equivalent output across split vs bulk DRBG requests.
+  **Type:** Positive regression test.  
+  **Description:** Compares split-request and bulk-request output generation in
+  HMAC-DRBG.  
+  **Expected Output:** Equivalent request patterns produce identical output
+  sequences.

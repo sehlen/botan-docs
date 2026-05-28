@@ -328,11 +328,49 @@ The following mode/stream-cipher tests existed in Botan 3.11.0 and were
 previously missing from this specification:
 
 - **MODE-CFB-1** (CFB mode vectors)
-- **MODE-XTS-1** (XTS mode vectors)
-- **MODE-CTR-CM-1** (CTR vectors from ``test_modes.cpp`` cipher-mode tests)
-- **MODE-IV-CARRY-1** (`Cipher_Mode_IV_Carry_Tests`)
-- **MODE-CHACHA20-1** (ChaCha20 stream cipher vectors)
-- **MODE-OFB-1** (OFB stream cipher vectors)
-- **MODE-RC4-1** (RC4 stream cipher vectors)
-- **MODE-SALSA20-1** (Salsa20 stream cipher vectors)
-- **MODE-SHAKE-1** (SHAKE stream/XOF vectors)
+  **Type:** Positive vector test.  
+  **Description:** Runs CFB encrypt/decrypt vectors.  
+  **Expected Output:** Ciphertext/plaintext results match expected vectors.
+
+- **MODE-XTS-1** (XTS mode vectors)  
+  **Type:** Positive vector test.  
+  **Description:** Covers XTS mode data-unit encryption/decryption vectors.  
+  **Expected Output:** XTS outputs match the known-answer vectors.
+
+- **MODE-CTR-CM-1** (CTR vectors from ``test_modes.cpp`` cipher-mode tests)  
+  **Type:** Positive vector test.  
+  **Description:** Covers CTR mode vectors exercised by cipher-mode unit
+  tests.  
+  **Expected Output:** Counter mode output matches expected vector values.
+
+- **MODE-IV-CARRY-1** (`Cipher_Mode_IV_Carry_Tests`)  
+  **Type:** Positive regression test.  
+  **Description:** Validates IV carry/update behavior across chunked
+  processing.  
+  **Expected Output:** Stateful updates produce the same result as equivalent
+  single-shot processing.
+
+- **MODE-CHACHA20-1** (ChaCha20 stream cipher vectors)  
+  **Type:** Positive vector test.  
+  **Description:** Runs ChaCha20 stream cipher vectors.  
+  **Expected Output:** Keystream/XOR output matches expected vectors.
+
+- **MODE-OFB-1** (OFB stream cipher vectors)  
+  **Type:** Positive vector test.  
+  **Description:** Runs OFB stream-style mode vectors.  
+  **Expected Output:** Output stream bytes match expected test vectors.
+
+- **MODE-RC4-1** (RC4 stream cipher vectors)  
+  **Type:** Positive vector test.  
+  **Description:** Runs RC4 known-answer vectors.  
+  **Expected Output:** Generated stream output matches vector expectations.
+
+- **MODE-SALSA20-1** (Salsa20 stream cipher vectors)  
+  **Type:** Positive vector test.  
+  **Description:** Runs Salsa20 stream cipher vectors.  
+  **Expected Output:** Produced keystream/ciphertext matches expected values.
+
+- **MODE-SHAKE-1** (SHAKE stream/XOF vectors)  
+  **Type:** Positive vector test.  
+  **Description:** Covers SHAKE XOF/stream-style output tests.  
+  **Expected Output:** Generated XOF output bytes match expected vectors.
