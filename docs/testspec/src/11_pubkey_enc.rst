@@ -496,33 +496,95 @@ test vectors are listed in :srcref:`src/tests/data/pubkey/rsaes.vec` and
 Additional Botan 3.11 Coverage
 ------------------------------
 
-The following public-key encryption tests existed in Botan 3.11.0 and were
-previously missing from this specification:
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **PKENC-ECIES-3** (`pubkey/ecies`)  
-  **Type:** Positive regression test.  
-  **Description:** Covers additional non-ISO ECIES test registrations and
-  execution paths.  
-  **Expected Output:** Encryption/decryption checks complete successfully and
-  match expected behavior for the registered vectors.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | PKENC-ECIES-3                                                                  |
+   +======================+================================================================================+
+   | **Type:**            | Positive regression test                                                       |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Covers additional non-ISO ECIES test registrations and execution paths         |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`pubkey/ecies`)                                                               |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Encryption/decryption checks complete successfully and match expected behavior |
+   |                      | for the registered vectors                                                     |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for PKENC-ECIES-3 (`pubkey/ecies`)         |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
 
-- **PKENC-DLIES-3** (`pubkey/dlies_unit`)  
-  **Type:** Positive unit/regression test.  
-  **Description:** Covers DLIES unit tests not previously represented in this
-  specification.  
-  **Expected Output:** DLIES operations satisfy roundtrip and expected-result
-  assertions.
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **PKENC-RSA-BLINDING-1** (`pubkey/rsa_blinding`)  
-  **Type:** Positive regression test.  
-  **Description:** Tests RSA blinding behavior, including blinder
-  reinitialization handling.  
-  **Expected Output:** Operations succeed while preserving correctness across
-  blinding state changes.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | PKENC-DLIES-3                                                                  |
+   +======================+================================================================================+
+   | **Type:**            | Positive unit/regression test                                                  |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Covers DLIES unit tests not previously represented in this specification       |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`pubkey/dlies_unit`)                                                          |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | DLIES operations satisfy roundtrip and expected-result assertions              |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for PKENC-DLIES-3 (`pubkey/dlies_unit`)    |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
 
-- **PKENC-RSA-DEC-OR-RAND-1** (`pubkey/rsa_decrypt_or_random`)  
-  **Type:** Negative/robustness test.  
-  **Description:** Exercises ``decrypt_or_random`` with malformed ciphertext
-  and content checks.  
-  **Expected Output:** Malformed inputs do not leak oracle behavior and the API
-  follows expected decrypt-or-random semantics.
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | PKENC-RSA-BLINDING-1                                                           |
+   +======================+================================================================================+
+   | **Type:**            | Positive regression test                                                       |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Tests RSA blinding behavior, including blinder reinitialization handling       |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`pubkey/rsa_blinding`)                                                        |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Operations succeed while preserving correctness across blinding state changes  |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for PKENC-RSA-BLINDING-1                   |
+   |                      | (`pubkey/rsa_blinding`)                                                        |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | PKENC-RSA-DEC-OR-RAND-1                                                        |
+   +======================+================================================================================+
+   | **Type:**            | Negative/robustness test                                                       |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Exercises ``decrypt_or_random`` with malformed ciphertext and content checks   |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`pubkey/rsa_decrypt_or_random`)                                               |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Malformed inputs do not leak oracle behavior and the API follows expected      |
+   |                      | decrypt-or-random semantics                                                    |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for PKENC-RSA-DEC-OR-RAND-1                |
+   |                      | (`pubkey/rsa_decrypt_or_random`)                                               |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+

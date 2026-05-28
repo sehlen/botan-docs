@@ -159,30 +159,95 @@ test vectors are listed in :srcref:`src/tests/data/argon2.vec`.
 Additional Botan 3.11 Coverage
 ------------------------------
 
-The following PBKDF tests existed in Botan 3.11.0 and were previously missing
-from this specification:
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **PBKDF-BCRYPT-1** (Bcrypt-PBKDF vectors)
-  **Type:** Positive vector test.  
-  **Description:** Runs bcrypt-pbkdf vectors across defined cost/iteration
-  settings.  
-  **Expected Output:** Derived keys match expected vector values.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | PBKDF-BCRYPT-1                                                                 |
+   +======================+================================================================================+
+   | **Type:**            | Positive vector test                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Runs bcrypt-pbkdf vectors across defined cost/iteration settings               |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (Bcrypt-PBKDF vectors)                                                         |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Derived keys match expected vector values                                      |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for PBKDF-BCRYPT-1 (Bcrypt-PBKDF vectors)  |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
 
-- **PBKDF-SCRYPT-1** (Scrypt vectors)  
-  **Type:** Positive vector test.  
-  **Description:** Runs scrypt vectors over known parameter sets.  
-  **Expected Output:** Derived keys match expected test vectors.
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **PBKDF-PWDHASH-1** (password-hash family parameter tuning coverage)  
-  **Type:** Positive API/regression test.  
-  **Description:** Verifies password-hash helper behavior for parameter
-  calibration and accepted ranges.  
-  **Expected Output:** Parameter selection and derivation operations succeed
-  and return consistent results.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | PBKDF-SCRYPT-1                                                                 |
+   +======================+================================================================================+
+   | **Type:**            | Positive vector test                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Runs scrypt vectors over known parameter sets                                  |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (Scrypt vectors)                                                               |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Derived keys match expected test vectors                                       |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for PBKDF-SCRYPT-1 (Scrypt vectors)        |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
 
-- **PBKDF-PGP-S2K-1** (OpenPGP S2K iteration and vector coverage)  
-  **Type:** Positive vector/regression test.  
-  **Description:** Covers OpenPGP S2K iteration handling and registered
-  vectors.  
-  **Expected Output:** S2K-derived outputs match expected values for each
-  vector.
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | PBKDF-PWDHASH-1                                                                |
+   +======================+================================================================================+
+   | **Type:**            | Positive API/regression test                                                   |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Verifies password-hash helper behavior for parameter calibration and accepted  |
+   |                      | ranges                                                                         |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (password-hash family parameter tuning coverage)                               |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Parameter selection and derivation operations succeed and return consistent    |
+   |                      | results                                                                        |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for PBKDF-PWDHASH-1 (password-hash family  |
+   |                      | parameter tuning coverage)                                                     |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | PBKDF-PGP-S2K-1                                                                |
+   +======================+================================================================================+
+   | **Type:**            | Positive vector/regression test                                                |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Covers OpenPGP S2K iteration handling and registered vectors                   |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (OpenPGP S2K iteration and vector coverage)                                    |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | S2K-derived outputs match expected values for each vector                      |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for PBKDF-PGP-S2K-1 (OpenPGP S2K iteration |
+   |                      | and vector coverage)                                                           |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+

@@ -333,25 +333,72 @@ The system RNG is tested for basic consistency and functionality.
 Additional Botan 3.11 Coverage
 ------------------------------
 
-The following RNG tests existed in Botan 3.11.0 and were previously missing
-from this specification:
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **RNG-CHACHA-UNIT-1** (`chacha_rng_unit`)  
-  **Type:** Positive unit/regression test.  
-  **Description:** Covers ChaCha RNG seeding, clear/reset behavior and request
-  sizing edge cases.  
-  **Expected Output:** RNG API behavior remains consistent and output requests
-  complete with expected constraints.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | RNG-CHACHA-UNIT-1                                                              |
+   +======================+================================================================================+
+   | **Type:**            | Positive unit/regression test                                                  |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Covers ChaCha RNG seeding, clear/reset behavior and request sizing edge cases  |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`chacha_rng_unit`)                                                            |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | RNG API behavior remains consistent and output requests complete with expected |
+   |                      | constraints                                                                    |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for RNG-CHACHA-UNIT-1 (`chacha_rng_unit`)  |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
 
-- **RNG-PROCESSOR-1** (`processor_rng`)  
-  **Type:** Positive platform/regression test.  
-  **Description:** Exercises processor/hardware RNG behavior and invariants.  
-  **Expected Output:** RNG availability and output checks satisfy the tested
-  invariants without unexpected failures.
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **RNG-HMAC-DRBG-MULTI-1** (`hmac_drbg_multi_request`)  
-  **Type:** Positive regression test.  
-  **Description:** Compares split-request and bulk-request output generation in
-  HMAC-DRBG.  
-  **Expected Output:** Equivalent request patterns produce identical output
-  sequences.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | RNG-PROCESSOR-1                                                                |
+   +======================+================================================================================+
+   | **Type:**            | Positive platform/regression test                                              |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Exercises processor/hardware RNG behavior and invariants                       |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`processor_rng`)                                                              |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | RNG availability and output checks satisfy the tested invariants without       |
+   |                      | unexpected failures                                                            |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for RNG-PROCESSOR-1 (`processor_rng`)      |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | RNG-HMAC-DRBG-MULTI-1                                                          |
+   +======================+================================================================================+
+   | **Type:**            | Positive regression test                                                       |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Compares split-request and bulk-request output generation in HMAC-DRBG         |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`hmac_drbg_multi_request`)                                                    |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Equivalent request patterns produce identical output sequences                 |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for RNG-HMAC-DRBG-MULTI-1                  |
+   |                      | (`hmac_drbg_multi_request`)                                                    |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+

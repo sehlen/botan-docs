@@ -1870,80 +1870,267 @@ table shows an example test case with one test vector.
 Additional Botan 3.11 Coverage
 ------------------------------
 
-The following signature tests existed in Botan 3.11.0 and were previously
-missing from this specification:
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **PKSIG-ML-DSA-4** (`ml_dsa_verify`)  
-  **Type:** Positive vector test.  
-  **Description:** Verifies ML-DSA signatures against registered verification
-  vectors.  
-  **Expected Output:** Valid signatures verify successfully and invalid cases
-  are rejected.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | PKSIG-ML-DSA-4                                                                 |
+   +======================+================================================================================+
+   | **Type:**            | Positive vector test                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Verifies ML-DSA signatures against registered verification vectors             |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`ml_dsa_verify`)                                                              |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Valid signatures verify successfully and invalid cases are rejected            |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for PKSIG-ML-DSA-4 (`ml_dsa_verify`)       |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
 
-- **PKSIG-ECDSA-5** (`ecdsa_all_groups`)  
-  **Type:** Positive regression test.  
-  **Description:** Sweeps ECDSA sign/verify over all supported EC groups.  
-  **Expected Output:** Signatures produced on each supported group verify
-  correctly.
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **PKSIG-ECDSA-6** (`ecdsa_sign_verify_der`)  
-  **Type:** Positive format/regression test.  
-  **Description:** Covers DER-encoded ECDSA signature generation and
-  verification paths.  
-  **Expected Output:** DER signatures are accepted when valid and rejected when
-  malformed.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | PKSIG-ECDSA-5                                                                  |
+   +======================+================================================================================+
+   | **Type:**            | Positive regression test                                                       |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Sweeps ECDSA sign/verify over all supported EC groups                          |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`ecdsa_all_groups`)                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Signatures produced on each supported group verify correctly                   |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for PKSIG-ECDSA-5 (`ecdsa_all_groups`)     |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
 
-- **PKSIG-ECDSA-7** (`ecdsa_key_recovery`)  
-  **Type:** Positive vector/regression test.  
-  **Description:** Tests ECDSA public-key recovery vectors.  
-  **Expected Output:** Recovered public keys match expected keys for valid
-  inputs.
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **PKSIG-RSA-4** (`rsa_pss`, `rsa_pss_raw`)  
-  **Type:** Positive vector test.  
-  **Description:** Covers RSA-PSS and RSA-PSS-Raw sign/verify vectors.  
-  **Expected Output:** Signature verification results match expected vector
-  outcomes.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | PKSIG-ECDSA-6                                                                  |
+   +======================+================================================================================+
+   | **Type:**            | Positive format/regression test                                                |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Covers DER-encoded ECDSA signature generation and verification paths           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`ecdsa_sign_verify_der`)                                                      |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | DER signatures are accepted when valid and rejected when malformed             |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for PKSIG-ECDSA-6 (`ecdsa_sign_verify_der`)|
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
 
-- **PKSIG-RSA-5** (`rsa_blinding`)  
-  **Type:** Positive regression test.  
-  **Description:** Exercises RSA blinding during private-key signing
-  operations.  
-  **Expected Output:** Signing remains correct while blinding behavior is
-  applied.
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **PKSIG-KEY-RSA-2** (`rsa_keygen_badrng`)  
-  **Type:** Negative test.  
-  **Description:** Tests RSA key generation with bad/failing RNG behavior.  
-  **Expected Output:** Keygen fails safely with expected error behavior.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | PKSIG-ECDSA-7                                                                  |
+   +======================+================================================================================+
+   | **Type:**            | Positive vector/regression test                                                |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Tests ECDSA public-key recovery vectors                                        |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`ecdsa_key_recovery`)                                                         |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Recovered public keys match expected keys for valid inputs                     |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for PKSIG-ECDSA-7 (`ecdsa_key_recovery`)   |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
 
-- **PKSIG-HSS/LMS-3** (`hss_lms_api`)  
-  **Type:** Positive API test.  
-  **Description:** Covers HSS/LMS API-level sign/verify operations.  
-  **Expected Output:** API operations succeed for valid inputs and verify
-  correctly.
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **PKSIG-HSS/LMS-4** (`hss_lms_state`)  
-  **Type:** Positive stateful regression test.  
-  **Description:** Validates state progression and one-time-signature usage for
-  HSS/LMS.  
-  **Expected Output:** State updates occur as expected and invalid state reuse
-  is detected.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | PKSIG-RSA-4                                                                    |
+   +======================+================================================================================+
+   | **Type:**            | Positive vector test                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Covers RSA-PSS and RSA-PSS-Raw sign/verify vectors                             |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`rsa_pss`, `rsa_pss_raw`)                                                     |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Signature verification results match expected vector outcomes                  |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for PKSIG-RSA-4 (`rsa_pss`, `rsa_pss_raw`) |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
 
-- **PKSIG-SLH-DSA-4** (`slh_dsa_keygen`)  
-  **Type:** Positive keygen test.  
-  **Description:** Covers SLH-DSA/SPHINCS+ key generation behavior.  
-  **Expected Output:** Generated keys are valid and usable for subsequent
-  signing operations.
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **PKSIG-XMSS-4** (`xmss_keygen`)  
-  **Type:** Positive keygen test.  
-  **Description:** Covers XMSS key generation paths.  
-  **Expected Output:** Generated XMSS keys are valid and accepted by signing
-  APIs.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | PKSIG-RSA-5                                                                    |
+   +======================+================================================================================+
+   | **Type:**            | Positive regression test                                                       |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Exercises RSA blinding during private-key signing operations                   |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`rsa_blinding`)                                                               |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Signing remains correct while blinding behavior is applied                     |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for PKSIG-RSA-5 (`rsa_blinding`)           |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
 
-- **PKSIG-XMSS-5** (`xmss_statefulness`)  
-  **Type:** Positive stateful regression test.  
-  **Description:** Verifies XMSS one-time/stateful signature behavior.  
-  **Expected Output:** Signature state advances correctly and disallowed reuse
-  is rejected.
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | PKSIG-KEY-RSA-2                                                                |
+   +======================+================================================================================+
+   | **Type:**            | Negative test                                                                  |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Tests RSA key generation with bad/failing RNG behavior                         |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`rsa_keygen_badrng`)                                                          |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Keygen fails safely with expected error behavior                               |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for PKSIG-KEY-RSA-2 (`rsa_keygen_badrng`)  |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | PKSIG-HSS/LMS-3                                                                |
+   +======================+================================================================================+
+   | **Type:**            | Positive API test                                                              |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Covers HSS/LMS API-level sign/verify operations                                |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`hss_lms_api`)                                                                |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | API operations succeed for valid inputs and verify correctly                   |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for PKSIG-HSS/LMS-3 (`hss_lms_api`)        |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | PKSIG-HSS/LMS-4                                                                |
+   +======================+================================================================================+
+   | **Type:**            | Positive stateful regression test                                              |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Validates state progression and one-time-signature usage for HSS/LMS           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`hss_lms_state`)                                                              |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | State updates occur as expected and invalid state reuse is detected            |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for PKSIG-HSS/LMS-4 (`hss_lms_state`)      |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | PKSIG-SLH-DSA-4                                                                |
+   +======================+================================================================================+
+   | **Type:**            | Positive keygen test                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Covers SLH-DSA/SPHINCS+ key generation behavior                                |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`slh_dsa_keygen`)                                                             |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Generated keys are valid and usable for subsequent signing operations          |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for PKSIG-SLH-DSA-4 (`slh_dsa_keygen`)     |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | PKSIG-XMSS-4                                                                   |
+   +======================+================================================================================+
+   | **Type:**            | Positive keygen test                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Covers XMSS key generation paths                                               |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`xmss_keygen`)                                                                |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Generated XMSS keys are valid and accepted by signing APIs                     |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for PKSIG-XMSS-4 (`xmss_keygen`)           |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | PKSIG-XMSS-5                                                                   |
+   +======================+================================================================================+
+   | **Type:**            | Positive stateful regression test                                              |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Verifies XMSS one-time/stateful signature behavior                             |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`xmss_statefulness`)                                                          |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Signature state advances correctly and disallowed reuse is rejected            |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for PKSIG-XMSS-5 (`xmss_statefulness`)     |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+

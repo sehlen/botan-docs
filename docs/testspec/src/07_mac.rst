@@ -411,25 +411,92 @@ The tests are taken from NIST's `KMAC_samples.pdf <https://csrc.nist.gov/CSRC/me
 Additional Botan 3.11 Coverage
 ------------------------------
 
-The following MAC tests existed in Botan 3.11.0 and were previously missing
-from this specification:
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **MAC-BLAKE2B-1** (BLAKE2b-MAC KAT coverage)
-  **Type:** Positive known-answer test.  
-  **Description:** Runs BLAKE2b-MAC vectors with fixed key/message pairs.  
-  **Expected Output:** MAC tags match the expected KAT outputs.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | MAC-BLAKE2B-1                                                                  |
+   +======================+================================================================================+
+   | **Type:**            | Positive known-answer test                                                     |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Runs BLAKE2b-MAC vectors with fixed key/message pairs                          |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (BLAKE2b-MAC KAT coverage)                                                     |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | MAC tags match the expected KAT outputs                                        |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for MAC-BLAKE2B-1 (BLAKE2b-MAC KAT         |
+   |                      | coverage)                                                                      |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
 
-- **MAC-POLY1305-1** (Poly1305 KAT coverage)  
-  **Type:** Positive known-answer test.  
-  **Description:** Runs Poly1305 vectors for keyed message authentication.  
-  **Expected Output:** Computed tags match the expected vector tags.
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **MAC-SIPHASH-1** (SipHash KAT coverage)  
-  **Type:** Positive known-answer test.  
-  **Description:** Runs SipHash vectors over canonical message sequences.  
-  **Expected Output:** SipHash outputs match the referenced expected values.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | MAC-POLY1305-1                                                                 |
+   +======================+================================================================================+
+   | **Type:**            | Positive known-answer test                                                     |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Runs Poly1305 vectors for keyed message authentication                         |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (Poly1305 KAT coverage)                                                        |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Computed tags match the expected vector tags                                   |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for MAC-POLY1305-1 (Poly1305 KAT coverage) |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
 
-- **MAC-X9.19-1** (X9.19 MAC KAT coverage)  
-  **Type:** Positive known-answer test.  
-  **Description:** Runs ANSI X9.19 MAC vectors.  
-  **Expected Output:** Generated MAC values match expected vector outputs.
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | MAC-SIPHASH-1                                                                  |
+   +======================+================================================================================+
+   | **Type:**            | Positive known-answer test                                                     |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Runs SipHash vectors over canonical message sequences                          |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (SipHash KAT coverage)                                                         |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | SipHash outputs match the referenced expected values                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for MAC-SIPHASH-1 (SipHash KAT coverage)   |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | MAC-X9.19-1                                                                    |
+   +======================+================================================================================+
+   | **Type:**            | Positive known-answer test                                                     |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Runs ANSI X9.19 MAC vectors                                                    |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (X9.19 MAC KAT coverage)                                                       |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Generated MAC values match expected vector outputs                             |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for MAC-X9.19-1 (X9.19 MAC KAT coverage)   |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+

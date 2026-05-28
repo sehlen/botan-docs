@@ -457,32 +457,113 @@ All test vectors are listed in :srcref:`src/tests/data/kdf/hkdf.vec`.
 Additional Botan 3.11 Coverage
 ------------------------------
 
-The following KDF tests existed in Botan 3.11.0 and were previously missing
-from this specification:
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **KDF-KDF1-X963-1** (KDF1 / X9.63 vectors)
-  **Type:** Positive vector test.  
-  **Description:** Runs KDF1/X9.63 known-answer vectors.  
-  **Expected Output:** Derived key bytes match the referenced vectors.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | KDF-KDF1-X963-1                                                                |
+   +======================+================================================================================+
+   | **Type:**            | Positive vector test                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Runs KDF1/X9.63 known-answer vectors                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (KDF1 / X9.63 vectors)                                                         |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Derived key bytes match the referenced vectors                                 |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for KDF-KDF1-X963-1 (KDF1 / X9.63 vectors) |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
 
-- **KDF-KDF2-1** (KDF2 vectors)  
-  **Type:** Positive vector test.  
-  **Description:** Runs KDF2 known-answer vectors.  
-  **Expected Output:** Derived key bytes match expected output for each vector.
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **KDF-SP800-56A-1** (SP800-56A vectors)  
-  **Type:** Positive vector test.  
-  **Description:** Covers SP800-56A KDF test vectors.  
-  **Expected Output:** KDF output is identical to the specified vector output.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | KDF-KDF2-1                                                                     |
+   +======================+================================================================================+
+   | **Type:**            | Positive vector test                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Runs KDF2 known-answer vectors                                                 |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (KDF2 vectors)                                                                 |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Derived key bytes match expected output for each vector                        |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for KDF-KDF2-1 (KDF2 vectors)              |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
 
-- **KDF-X942-1** (X9.42 PRF vectors)  
-  **Type:** Positive vector test.  
-  **Description:** Covers ANSI X9.42 PRF/KDF vector processing.  
-  **Expected Output:** PRF/KDF output matches expected test vector bytes.
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **KDF-HKDF-LABEL-1** (`hkdf_label`)  
-  **Type:** Positive API/vector test.  
-  **Description:** Covers ``HKDF-Expand-Label`` behavior and label/context
-  handling.  
-  **Expected Output:** Expanded output matches Botan's expected HKDF-label
-  results.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | KDF-SP800-56A-1                                                                |
+   +======================+================================================================================+
+   | **Type:**            | Positive vector test                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Covers SP800-56A KDF test vectors                                              |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (SP800-56A vectors)                                                            |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | KDF output is identical to the specified vector output                         |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for KDF-SP800-56A-1 (SP800-56A vectors)    |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | KDF-X942-1                                                                     |
+   +======================+================================================================================+
+   | **Type:**            | Positive vector test                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Covers ANSI X9.42 PRF/KDF vector processing                                    |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (X9.42 PRF vectors)                                                            |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | PRF/KDF output matches expected test vector bytes                              |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for KDF-X942-1 (X9.42 PRF vectors)         |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | KDF-HKDF-LABEL-1                                                               |
+   +======================+================================================================================+
+   | **Type:**            | Positive API/vector test                                                       |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Covers ``HKDF-Expand-Label`` behavior and label/context handling               |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`hkdf_label`)                                                                 |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Expanded output matches Botan's expected HKDF-label results                    |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for KDF-HKDF-LABEL-1 (`hkdf_label`)        |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+

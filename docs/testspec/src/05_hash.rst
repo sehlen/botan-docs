@@ -1062,22 +1062,52 @@ Parallel Hash Function Tests
 Additional Botan 3.11 Coverage
 ------------------------------
 
-The following hash tests existed in Botan 3.11.0 and were previously missing
-from this specification:
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **HASH-INVALID-NAME-1** (`invalid_name_hash`)  
-  **Type:** Negative test.  
-  **Description:** Validates hash construction with invalid algorithm names and
-  invalid parameterized hash specifications.  
-  **Expected Output:** Invalid names/parameterizations are rejected and error
-  handling matches Botan's expected behavior.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | HASH-INVALID-NAME-1                                                            |
+   +======================+================================================================================+
+   | **Type:**            | Negative test                                                                  |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Validates hash construction with invalid algorithm names and invalid           |
+   |                      | parameterized hash specifications                                              |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`invalid_name_hash`)                                                          |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Invalid names/parameterizations are rejected and error handling matches Botan's|
+   |                      | expected behavior                                                              |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for HASH-INVALID-NAME-1                    |
+   |                      | (`invalid_name_hash`)                                                          |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
 
-- **HASH-TRUNC-NEG-1** (`hash_truncation`)  
-  **Type:** Negative test.  
-  **Description:** Tests invalid ``Truncated(...)`` hash parameter
-  combinations.  
-  **Expected Output:** Unsupported or malformed truncation specifications are
-  rejected consistently.
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | HASH-TRUNC-NEG-1                                                               |
+   +======================+================================================================================+
+   | **Type:**            | Negative test                                                                  |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Tests invalid ``Truncated(...)`` hash parameter combinations                   |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`hash_truncation`)                                                            |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Unsupported or malformed truncation specifications are rejected consistently   |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for HASH-TRUNC-NEG-1 (`hash_truncation`)   |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
 
 .. table::
    :class: longtable

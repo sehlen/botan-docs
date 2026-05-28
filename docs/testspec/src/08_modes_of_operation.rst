@@ -324,53 +324,205 @@ test vectors are listed in :srcref:`src/tests/data/stream/ctr.vec`.
 Additional Botan 3.11 Coverage
 ------------------------------
 
-The following mode/stream-cipher tests existed in Botan 3.11.0 and were
-previously missing from this specification:
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **MODE-CFB-1** (CFB mode vectors)
-  **Type:** Positive vector test.  
-  **Description:** Runs CFB encrypt/decrypt vectors.  
-  **Expected Output:** Ciphertext/plaintext results match expected vectors.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | MODE-CFB-1                                                                     |
+   +======================+================================================================================+
+   | **Type:**            | Positive vector test                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Runs CFB encrypt/decrypt vectors                                               |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (CFB mode vectors)                                                             |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Ciphertext/plaintext results match expected vectors                            |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for MODE-CFB-1 (CFB mode vectors)          |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
 
-- **MODE-XTS-1** (XTS mode vectors)  
-  **Type:** Positive vector test.  
-  **Description:** Covers XTS mode data-unit encryption/decryption vectors.  
-  **Expected Output:** XTS outputs match the known-answer vectors.
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **MODE-CTR-CM-1** (CTR vectors from ``test_modes.cpp`` cipher-mode tests)  
-  **Type:** Positive vector test.  
-  **Description:** Covers CTR mode vectors exercised by cipher-mode unit
-  tests.  
-  **Expected Output:** Counter mode output matches expected vector values.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | MODE-XTS-1                                                                     |
+   +======================+================================================================================+
+   | **Type:**            | Positive vector test                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Covers XTS mode data-unit encryption/decryption vectors                        |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (XTS mode vectors)                                                             |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | XTS outputs match the known-answer vectors                                     |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for MODE-XTS-1 (XTS mode vectors)          |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
 
-- **MODE-IV-CARRY-1** (`Cipher_Mode_IV_Carry_Tests`)  
-  **Type:** Positive regression test.  
-  **Description:** Validates IV carry/update behavior across chunked
-  processing.  
-  **Expected Output:** Stateful updates produce the same result as equivalent
-  single-shot processing.
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **MODE-CHACHA20-1** (ChaCha20 stream cipher vectors)  
-  **Type:** Positive vector test.  
-  **Description:** Runs ChaCha20 stream cipher vectors.  
-  **Expected Output:** Keystream/XOR output matches expected vectors.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | MODE-CTR-CM-1                                                                  |
+   +======================+================================================================================+
+   | **Type:**            | Positive vector test                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Covers CTR mode vectors exercised by cipher-mode unit tests                    |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (CTR vectors from ``test_modes.cpp`` cipher-mode tests)                        |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Counter mode output matches expected vector values                             |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for MODE-CTR-CM-1 (CTR vectors from        |
+   |                      | ``test_modes.cpp`` cipher-mode tests)                                          |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
 
-- **MODE-OFB-1** (OFB stream cipher vectors)  
-  **Type:** Positive vector test.  
-  **Description:** Runs OFB stream-style mode vectors.  
-  **Expected Output:** Output stream bytes match expected test vectors.
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **MODE-RC4-1** (RC4 stream cipher vectors)  
-  **Type:** Positive vector test.  
-  **Description:** Runs RC4 known-answer vectors.  
-  **Expected Output:** Generated stream output matches vector expectations.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | MODE-IV-CARRY-1                                                                |
+   +======================+================================================================================+
+   | **Type:**            | Positive regression test                                                       |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Validates IV carry/update behavior across chunked processing                   |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (`Cipher_Mode_IV_Carry_Tests`)                                                 |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Stateful updates produce the same result as equivalent single-shot processing  |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for MODE-IV-CARRY-1                        |
+   |                      | (`Cipher_Mode_IV_Carry_Tests`)                                                 |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
 
-- **MODE-SALSA20-1** (Salsa20 stream cipher vectors)  
-  **Type:** Positive vector test.  
-  **Description:** Runs Salsa20 stream cipher vectors.  
-  **Expected Output:** Produced keystream/ciphertext matches expected values.
+.. table::
+   :class: longtable
+   :widths: 20 80
 
-- **MODE-SHAKE-1** (SHAKE stream/XOF vectors)  
-  **Type:** Positive vector test.  
-  **Description:** Covers SHAKE XOF/stream-style output tests.  
-  **Expected Output:** Generated XOF output bytes match expected vectors.
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | MODE-CHACHA20-1                                                                |
+   +======================+================================================================================+
+   | **Type:**            | Positive vector test                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Runs ChaCha20 stream cipher vectors                                            |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (ChaCha20 stream cipher vectors)                                               |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Keystream/XOR output matches expected vectors                                  |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for MODE-CHACHA20-1 (ChaCha20 stream cipher|
+   |                      | vectors)                                                                       |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | MODE-OFB-1                                                                     |
+   +======================+================================================================================+
+   | **Type:**            | Positive vector test                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Runs OFB stream-style mode vectors                                             |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (OFB stream cipher vectors)                                                    |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Output stream bytes match expected test vectors                                |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for MODE-OFB-1 (OFB stream cipher vectors) |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | MODE-RC4-1                                                                     |
+   +======================+================================================================================+
+   | **Type:**            | Positive vector test                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Runs RC4 known-answer vectors                                                  |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (RC4 stream cipher vectors)                                                    |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Generated stream output matches vector expectations                            |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for MODE-RC4-1 (RC4 stream cipher vectors) |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | MODE-SALSA20-1                                                                 |
+   +======================+================================================================================+
+   | **Type:**            | Positive vector test                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Runs Salsa20 stream cipher vectors                                             |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (Salsa20 stream cipher vectors)                                                |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Produced keystream/ciphertext matches expected values                          |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for MODE-SALSA20-1 (Salsa20 stream cipher  |
+   |                      | vectors)                                                                       |
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+
+.. table::
+   :class: longtable
+   :widths: 20 80
+
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Test Case No.:**   | MODE-SHAKE-1                                                                   |
+   +======================+================================================================================+
+   | **Type:**            | Positive vector test                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Description:**     | Covers SHAKE XOF/stream-style output tests                                     |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Preconditions:**   | None                                                                           |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Input Values:**    | (SHAKE stream/XOF vectors)                                                     |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Expected Output:** | Generated XOF output bytes match expected vectors                              |
+   +----------------------+--------------------------------------------------------------------------------+
+   | **Steps:**           | #. Execute the Botan 3.11 test case for MODE-SHAKE-1 (SHAKE stream/XOF vectors)|
+   |                      |                                                                                |
+   |                      | #. Verify the observed behavior matches the expected output.                   |
+   +----------------------+--------------------------------------------------------------------------------+
+
