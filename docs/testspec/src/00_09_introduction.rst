@@ -2,6 +2,8 @@ Introduction
 ============
 
 This document specifies test cases implemented in the test suite.
+Its scope follows Botan's implemented tests and is not restricted to the
+algorithm recommendations of BSI TR-02102-1.
 
 It covers AEAD modes, block ciphers, hash functions, public key-based key
 agreement schemes, key derivation functions, message authentication codes, block
